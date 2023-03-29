@@ -5,7 +5,7 @@ const greeting = "greeting traveler";
 </script>
 
 <template>
-  <div>
+  <div class="text-2xl texrt">
     my E-Shop
     <MyComp :msg="greeting" />
   </div>
