@@ -3,10 +3,8 @@ defineProps<{ msg: string }>();
 </script>
 
 <template>
-  <div class="text-6xl">
+  <div>
     hi man {{ msg }}
-    <h1 class="text-3xl font-bold underline font">Hello world!</h1>
+    <h1 class="text-3xl font-bold underline">Hello world!</h1>
   </div>
 </template>
-
-<style scoped></style>
