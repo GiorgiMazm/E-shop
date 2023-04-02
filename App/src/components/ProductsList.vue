@@ -37,6 +37,20 @@ const productsList: Ref<Item[]> = ref([
     id: 4,
   },
 ]);
+
+let counter = 5;
+const price = ref(0);
+const name = ref("");
+const imageLink = ref("");
+function addProductItem() {
+  const obj: Item = {
+    name: name.value,
+    price: price.value,
+    link: imageLink.value,
+    id: counter++,
+  };
+  productsList.value.push(obj);
+}
 </script>
 
 <template>
@@ -52,6 +66,40 @@ const productsList: Ref<Item[]> = ref([
           :key="item.id"
         />
       </div>
+
+      <form class="my-5">
+        <input
+          class="rounded mx-3 text-black px-3"
+          placeholder="Name of the product"
+          type="text"
+          v-model="name"
+        />
+        <label>Product name</label>
+
+        <input
+          class="rounded mx-3 text-black px-3"
+          placeholder="Price of the product"
+          type="text"
+          v-model="price"
+        />
+        <label>Product price</label>
+
+        <input
+          class="rounded mx-3 text-black px-3"
+          placeholder="Image of the product"
+          type="text"
+          v-model="imageLink"
+        />
+        <label>Product image</label>
+
+        <button
+          class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
+          @click.prevent="addProductItem"
+          type="submit"
+        >
+          Create
+        </button>
+      </form>
     </div>
   </section>
 </template>
