@@ -31,6 +31,10 @@ const userItems: Ref<Item[]> = ref([
     id: 4,
   },
 ]);
+
+function removeItem(index: number): void {
+  userItems.value.splice(index, 1);
+}
 </script>
 
 <template>
@@ -45,6 +49,7 @@ const userItems: Ref<Item[]> = ref([
           :name="item.name"
           :link="item.link"
           :price="item.price"
+          @remove-item-from-bag="removeItem"
         />
       </ul>
     </div>

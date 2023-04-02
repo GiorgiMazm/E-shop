@@ -33,7 +33,7 @@ const productsList: Ref<Item[]> = ref([
   },
 ]);
 let counter = 5;
-function addProductItem(name: string, price: number, imageLink: string) {
+function addProductItem(name: string, price: number, imageLink: string): void {
   const obj: Item = {
     name: name,
     price: price,
@@ -44,7 +44,7 @@ function addProductItem(name: string, price: number, imageLink: string) {
   toggleNewItemForm();
 }
 
-function removeProductItem(index: number) {
+function removeProductItem(index: number): void {
   productsList.value.splice(index, 1);
 }
 const newFormVisibility = ref(false);
