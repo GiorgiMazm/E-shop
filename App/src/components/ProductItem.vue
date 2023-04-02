@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { XMarkIcon } from "@heroicons/vue/24/solid";
 defineProps<{
   price: number;
   imgLink: string;
@@ -11,21 +12,10 @@ const emit = defineEmits<{ (e: "removeItem", index: number): void }>();
 
 <template>
   <div class="bg-red-800 w-80 m-2 p-2">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class="w-6 h-6 cursor-pointer"
+    <XMarkIcon
+      class="h-6 w-6 cursor-pointer hover:text-black"
       @click="emit('removeItem', index)"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M6 18L18 6M6 6l12 12"
-      />
-    </svg>
+    />
 
     <h2 class="text-center my-2">{{ itemName }}</h2>
 
