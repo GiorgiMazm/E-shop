@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import Item from "../Interfaces/Item";
-import { XMarkIcon } from "@heroicons/vue/24/solid";
+import UserBagItem from "./UserBagItem.vue";
 
 const userItems: Ref<Item[]> = ref([
   {
@@ -10,6 +10,26 @@ const userItems: Ref<Item[]> = ref([
     link: "https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021.jpg.og.jpg?202303230456",
     id: 1,
   },
+
+  {
+    name: "Macbook pro",
+    price: 2500,
+    link: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202206_GEO_EMEA_LANG_DE?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1664497359389",
+    id: 2,
+  },
+
+  {
+    name: "Macbook air",
+    price: 1500,
+    link: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/refurb-macbook-air-gold-m1-202010?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1634145607000",
+    id: 3,
+  },
+  {
+    name: "Lenovo thinkpad",
+    price: 3000,
+    link: "https://laptopmedia.com/wp-content/uploads/2021/06/3-52-e1624453916559.jpg",
+    id: 4,
+  },
 ]);
 </script>
 
@@ -17,19 +37,15 @@ const userItems: Ref<Item[]> = ref([
   <section class="bg-gray-400">
     <div class="container mx-auto">
       <h2 class="text-2xl">Your items:</h2>
-      <ul>
-        <li
+      <ul class="flex flex-wrap justify-center">
+        <UserBagItem
           v-for="(item, index) in userItems"
+          :index="index"
           :key="index"
-          class="border-2 border-gray-700 p-4 w-1/3 flex items-center my-3 relative"
-        >
-          <XMarkIcon
-            class="h-6 w-6 absolute left-2 top-5 cursor-pointer hover:text-white"
-          />
-          <span>{{ item.name }}</span>
-          <img class="h-32 mx-3" :src="item.link" :alt="item.name" />
-          <span class="mx-3">{{ item.price }}$</span>
-        </li>
+          :name="item.name"
+          :link="item.link"
+          :price="item.price"
+        />
       </ul>
     </div>
   </section>
