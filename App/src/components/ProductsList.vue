@@ -48,6 +48,10 @@ function addProductItem(name: string, price: number, imageLink: string) {
   };
   productsList.value.push(obj);
 }
+
+function removeProductItem(index: number) {
+  productsList.value.splice(index, 1);
+}
 </script>
 
 <template>
@@ -56,11 +60,13 @@ function addProductItem(name: string, price: number, imageLink: string) {
       <h1 class="text-4xl text-center pt-5">Our product</h1>
       <div class="flex flex-wrap justify-around mt-5">
         <ProductItem
-          v-for="item in productsList"
+          v-for="(item, index) in productsList"
           :item-name="item.name"
           :price="item.price"
           :img-link="item.link"
           :key="item.id"
+          :index="index"
+          @remove-item="removeProductItem"
         />
       </div>
       <ProductItemForm @add-item="addProductItem" />
