@@ -2,13 +2,7 @@
 import { ref, Ref } from "vue";
 import ProductItem from "./ProductItem.vue";
 import ProductItemForm from "./ProductItemForm.vue";
-
-interface Item {
-  name: string;
-  price: number;
-  link: string;
-  id: number;
-}
+import Item from "../Interfaces/Item";
 
 const productsList: Ref<Item[]> = ref([
   {
