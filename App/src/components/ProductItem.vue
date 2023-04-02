@@ -7,7 +7,10 @@ defineProps<{
   index: number;
 }>();
 
-const emit = defineEmits<{ (e: "removeItem", index: number): void }>();
+const emit = defineEmits<{
+  (e: "removeItem", index: number): void;
+  (e: "addItemToBag", index: number): void;
+}>();
 </script>
 
 <template>
@@ -24,7 +27,10 @@ const emit = defineEmits<{ (e: "removeItem", index: number): void }>();
     <button class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-600">
       Buy now
     </button>
-    <button class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500">
+    <button
+      @click="emit('addItemToBag', index)"
+      class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
+    >
       Add to basket
     </button>
   </div>

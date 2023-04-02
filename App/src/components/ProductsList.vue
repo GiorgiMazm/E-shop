@@ -44,6 +44,10 @@ function addProductItem(name: string, price: number, imageLink: string): void {
   toggleNewItemForm();
 }
 
+function addProductToBag(index: number): void {
+  console.log(productsList.value[index]);
+}
+
 function removeProductItem(index: number): void {
   productsList.value.splice(index, 1);
 }
@@ -67,6 +71,7 @@ function toggleNewItemForm(): void {
           :key="item.id"
           :index="index"
           @remove-item="removeProductItem"
+          @add-item-to-bag="addProductToBag"
         />
       </div>
       <button
