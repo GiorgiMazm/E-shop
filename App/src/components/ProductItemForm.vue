@@ -11,29 +11,29 @@ const emit = defineEmits<{
 
 <template>
   <form class="my-5">
+    <label>Product name</label>
     <input
       class="rounded mx-3 text-black px-3"
       placeholder="Name of the product"
       type="text"
       v-model="name"
     />
-    <label>Product name</label>
 
+    <label>Product price</label>
     <input
       class="rounded mx-3 text-black px-3"
       placeholder="Price of the product"
       type="text"
       v-model="price"
     />
-    <label>Product price</label>
 
+    <label>Product image</label>
     <input
       class="rounded mx-3 text-black px-3"
       placeholder="Image of the product"
       type="text"
       v-model="imageLink"
     />
-    <label>Product image</label>
 
     <button
       class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"

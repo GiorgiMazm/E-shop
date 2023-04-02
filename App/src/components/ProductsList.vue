@@ -47,10 +47,16 @@ function addProductItem(name: string, price: number, imageLink: string) {
     id: counter++,
   };
   productsList.value.push(obj);
+  toggleNewItemForm();
 }
 
 function removeProductItem(index: number) {
   productsList.value.splice(index, 1);
+}
+const newFormVisibility = ref(false);
+
+function toggleNewItemForm(): void {
+  newFormVisibility.value = !newFormVisibility.value;
 }
 </script>
 
@@ -69,7 +75,21 @@ function removeProductItem(index: number) {
           @remove-item="removeProductItem"
         />
       </div>
-      <ProductItemForm @add-item="addProductItem" />
+      <button
+        v-if="!newFormVisibility"
+        @click="toggleNewItemForm"
+        class="hover:text-black"
+      >
+        Add new product
+      </button>
+      <ProductItemForm v-if="newFormVisibility" @add-item="addProductItem" />
+      <button
+        class="mx-3 rounded-l bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
+        v-if="newFormVisibility"
+        @click="toggleNewItemForm"
+      >
+        Cancel
+      </button>
     </div>
   </section>
 </template>
