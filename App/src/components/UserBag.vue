@@ -35,8 +35,6 @@ const userItems: Ref<Item[]> = ref([
 function removeItem(index: number): void {
   userItems.value.splice(index, 1);
 }
-
-function addItem(): void {}
 </script>
 
 <template>
