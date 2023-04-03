@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { Ref, ref } from "vue";
+import { computed, Ref, ref } from "vue";
 import Item from "../Interfaces/Item";
 
 export const useProductStore = defineStore("Products", () => {
@@ -31,6 +31,14 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
+  const productsBag: Ref<Item[]> = ref([
+    {
+      name: "Macbook",
+      price: 2000,
+      link: "https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021.jpg.og.jpg?202303230456",
+      id: 1,
+    },
+  ]);
   const counter = ref(5);
 
   function addProductItem(
@@ -51,5 +59,27 @@ export const useProductStore = defineStore("Products", () => {
     productsList.value.splice(index, 1);
   }
 
-  return { productsList, addProductItem, removeProductItem };
+  function getProductById(id: number) {
+    return productsList.value.find((item) => item.id === id);
+  }
+
+  const getItemById = computed(() => {
+    return (id: number) => getProductById(id);
+  });
+
+  function addItemToBag(id: number): void {
+    const item = getItemById.value(id);
+    if (item !== undefined) {
+      productsBag.value.push(item);
+    }
+  }
+
+  return {
+    productsList,
+    addProductItem,
+    removeProductItem,
+    productsBag,
+    getItemById,
+    addItemToBag,
+  };
 });

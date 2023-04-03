@@ -6,12 +6,10 @@ defineProps<{
   imgLink: string;
   itemName: string;
   index: number;
+  id: number;
 }>();
 
 const store = useProductStore();
-const emit = defineEmits<{
-  (e: "addItemToBag", index: number): void;
-}>();
 </script>
 
 <template>
@@ -29,7 +27,7 @@ const emit = defineEmits<{
       Buy now
     </button>
     <button
-      @click="emit('addItemToBag', index)"
+      @click="store.addItemToBag(id)"
       class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
     >
       Add to basket

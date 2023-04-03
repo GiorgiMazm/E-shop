@@ -6,10 +6,6 @@ import { storeToRefs } from "pinia";
 
 const store = useProductStore();
 const { productsList } = storeToRefs(store);
-
-function addProductToBag(index: number): void {
-  console.log(productsList.value[index]);
-}
 </script>
 
 <template>
@@ -22,9 +18,9 @@ function addProductToBag(index: number): void {
           :item-name="item.name"
           :price="item.price"
           :img-link="item.link"
+          :id="item.id"
           :key="item.id"
           :index="index"
-          @add-item-to-bag="addProductToBag"
         />
       </div>
       <ProductItemForm />
