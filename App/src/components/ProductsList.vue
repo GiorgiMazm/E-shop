@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import ProductItem from "./ProductItem.vue";
 import ProductItemForm from "./ProductItemForm.vue";
 import { useProductStore } from "../stores/ProductStore";
@@ -10,12 +9,6 @@ const { productsList } = storeToRefs(store);
 
 function addProductToBag(index: number): void {
   console.log(productsList.value[index]);
-}
-
-const newFormVisibility = ref(false);
-
-function toggleNewItemForm(): void {
-  newFormVisibility.value = !newFormVisibility.value;
 }
 </script>
 
@@ -34,21 +27,7 @@ function toggleNewItemForm(): void {
           @add-item-to-bag="addProductToBag"
         />
       </div>
-      <button
-        v-if="!newFormVisibility"
-        @click="toggleNewItemForm"
-        class="hover:text-black"
-      >
-        Add new product
-      </button>
-      <ProductItemForm v-if="newFormVisibility" />
-      <button
-        class="mx-3 rounded-l bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
-        v-if="newFormVisibility"
-        @click="toggleNewItemForm"
-      >
-        Cancel
-      </button>
+      <ProductItemForm />
     </div>
   </section>
 </template>
