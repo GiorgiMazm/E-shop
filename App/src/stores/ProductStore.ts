@@ -31,14 +31,7 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  const productsBag: Ref<Item[]> = ref([
-    {
-      name: "Macbook",
-      price: 2000,
-      link: "https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021.jpg.og.jpg?202303230456",
-      id: 1,
-    },
-  ]);
+  const productsBag: Ref<Item[]> = ref([]);
   const counter = ref(5);
 
   function addProductItem(
@@ -74,6 +67,10 @@ export const useProductStore = defineStore("Products", () => {
     }
   }
 
+  function removeItemFromBag(index: number): void {
+    productsBag.value.splice(index, 1);
+  }
+
   return {
     productsList,
     addProductItem,
@@ -81,5 +78,6 @@ export const useProductStore = defineStore("Products", () => {
     productsBag,
     getItemById,
     addItemToBag,
+    removeItemFromBag,
   };
 });

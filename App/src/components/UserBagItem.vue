@@ -1,12 +1,14 @@
 <script lang="ts" setup>
 import { XMarkIcon } from "@heroicons/vue/24/solid";
+import { useProductStore } from "../stores/ProductStore";
 defineProps<{
   price: number;
   link: string;
   name: string;
   index: number;
 }>();
-const emit = defineEmits<{ (e: "removeItemFromBag", index: number): void }>();
+
+const store = useProductStore();
 </script>
 
 <template>
@@ -15,7 +17,7 @@ const emit = defineEmits<{ (e: "removeItemFromBag", index: number): void }>();
   >
     <XMarkIcon
       class="h-6 w-6 cursor-pointer hover:text-white absolute left-2 top-5"
-      @click.prevent="emit('removeItemFromBag', index)"
+      @click.prevent="store.removeItemFromBag(index)"
     />
     <span>{{ name }}</span>
     <img class="h-32 mx-3 w-36" :src="link" :alt="name" />

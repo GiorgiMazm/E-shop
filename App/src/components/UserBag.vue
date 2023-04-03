@@ -4,12 +4,7 @@ import { useProductStore } from "../stores/ProductStore";
 import { storeToRefs } from "pinia";
 
 const store = useProductStore();
-
 const { productsBag } = storeToRefs(store);
-
-function removeItem(index: number): void {
-  productsBag.value.splice(index, 1);
-}
 </script>
 
 <template>
@@ -24,7 +19,6 @@ function removeItem(index: number): void {
           :name="item.name"
           :link="item.link"
           :price="item.price"
-          @remove-item-from-bag="removeItem"
         />
       </ul>
     </div>
