@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { Ref, ref } from "vue";
 import Item from "../Interfaces/Item";
 
-export const useProductStore = defineStore("counter", () => {
+export const useProductStore = defineStore("Products", () => {
   const productsList: Ref<Item[]> = ref([
     {
       name: "Macbook",
@@ -31,6 +31,25 @@ export const useProductStore = defineStore("counter", () => {
       id: 4,
     },
   ]);
+  const counter = ref(5);
 
-  return { productsList };
+  function addProductItem(
+    name: string,
+    price: number,
+    imageLink: string
+  ): void {
+    const obj: Item = {
+      name: name,
+      price: price,
+      link: imageLink,
+      id: counter.value++,
+    };
+    productsList.value.push(obj);
+  }
+
+  function removeProductItem(index: number): void {
+    productsList.value.splice(index, 1);
+  }
+
+  return { productsList, addProductItem, removeProductItem };
 });
