@@ -34,6 +34,14 @@ export const useProductStore = defineStore("Products", () => {
   const productsBag: Ref<Item[]> = ref([]);
   const counter = ref(5);
 
+  const getProductList = computed(() => {
+    return productsList.value;
+  });
+
+  const getProductBag = computed(() => {
+    return productsBag.value;
+  });
+
   function addProductItem(
     name: string,
     price: number,
@@ -72,11 +80,11 @@ export const useProductStore = defineStore("Products", () => {
   }
 
   return {
-    productsList,
+    getProductList,
+    getProductBag,
+    getItemById,
     addProductItem,
     removeProductItem,
-    productsBag,
-    getItemById,
     addItemToBag,
     removeItemFromBag,
   };

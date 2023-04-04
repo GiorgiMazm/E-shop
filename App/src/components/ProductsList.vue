@@ -7,7 +7,8 @@ import Item from "../Interfaces/Item";
 import { Ref } from "vue";
 
 const store = useProductStore();
-const { productsList }: { productsList: Ref<Item[]> } = storeToRefs(store);
+const { getProductList: productsList }: { getProductList: Ref<Item[]> } =
+  storeToRefs(store);
 </script>
 
 <template>
