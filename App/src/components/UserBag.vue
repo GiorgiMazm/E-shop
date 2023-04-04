@@ -2,9 +2,11 @@
 import UserBagItem from "./UserBagItem.vue";
 import { useProductStore } from "../stores/ProductStore";
 import { storeToRefs } from "pinia";
+import { Ref } from "vue";
+import Item from "../Interfaces/Item";
 
 const store = useProductStore();
-const { productsBag } = storeToRefs(store);
+const { productsBag }: { productsBag: Ref<Item[]> } = storeToRefs(store);
 </script>
 
 <template>

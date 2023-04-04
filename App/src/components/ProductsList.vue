@@ -4,9 +4,10 @@ import ProductItemForm from "./ProductItemForm.vue";
 import { useProductStore } from "../stores/ProductStore";
 import { storeToRefs } from "pinia";
 import Item from "../Interfaces/Item";
+import { Ref } from "vue";
 
 const store = useProductStore();
-const { productsList } = storeToRefs(store);
+const { productsList }: { productsList: Ref<Item[]> } = storeToRefs(store);
 </script>
 
 <template>
