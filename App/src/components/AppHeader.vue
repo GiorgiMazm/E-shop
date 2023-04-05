@@ -1,31 +1,32 @@
 <script lang="ts" setup>
-import { ShoppingBagIcon } from "@heroicons/vue/24/solid";
+import {
+  ShoppingBagIcon,
+  HomeIcon,
+  ShoppingCartIcon,
+} from "@heroicons/vue/24/solid";
 </script>
 <template>
-  <header class="bg-gray-700">
+  <header class="bg-gray-700 py-5">
     <div class="flex justify-between items-center container mx-auto">
       <ul class="flex justify-between w-1/5 p-3 text-gray-300">
         <li>
           <router-link class="ma-2 hover:text-amber-600" to="/"
-            >Home</router-link
+            ><HomeIcon class="h-6 w-6 inline" /> Home</router-link
           >
         </li>
 
         <li>
-          <router-link class="ma-2 hover:text-amber-600" to="/products"
-            >Products</router-link
-          >
-        </li>
-
-        <li>
-          <router-link class="ma-2 hover:text-amber-600" to="/bag"
-            >Your Bag</router-link
+          <router-link class="ma-2 hover:text-amber-600" to="/products">
+            <ShoppingCartIcon class="h-6 w-6 inline" /> Products</router-link
           >
         </li>
       </ul>
 
       <div>
-        <ShoppingBagIcon class="h-8 w-8 text-gray-200" />
+        <router-link class="ma-2 text-gray-300 hover:text-amber-600" to="/bag"
+          ><ShoppingBagIcon class="h-8 w-8 text-gray-300 inline" />Your
+          Bag</router-link
+        >
       </div>
     </div>
   </header>
