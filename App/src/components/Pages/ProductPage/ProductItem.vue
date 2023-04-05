@@ -23,14 +23,24 @@ const store = useProductStore();
 
     <img class="h-80 w-full" :src="imgLink" :alt="itemName" />
     <p class="py-3">{{ price }}$</p>
-    <button class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-600">
-      Buy now
-    </button>
-    <button
-      @click="store.addItemToBag(id)"
-      class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
-    >
-      Add to basket
-    </button>
+    <div class="flex flex-wrap justify-around">
+      <button
+        class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-600"
+      >
+        Buy now
+      </button>
+      <button
+        @click="store.addItemToBag(id)"
+        class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
+      >
+        Add to basket
+      </button>
+
+      <button
+        class="my-5 rounded bg-gray-500 py-3 px-4 mr-3 hover:text-amber-500"
+      >
+        <router-link to="/productItem"> Learn more</router-link>
+      </button>
+    </div>
   </div>
 </template>
