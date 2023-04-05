@@ -5,9 +5,23 @@ import { ShoppingBagIcon } from "@heroicons/vue/24/solid";
   <header class="bg-gray-700">
     <div class="flex justify-between items-center container mx-auto">
       <ul class="flex justify-between w-1/5 p-3 text-gray-300">
-        <li><a class="hover:text-amber-600" href="#">Home</a></li>
-        <li><a class="hover:text-amber-600" href="#">Products</a></li>
-        <li><a class="hover:text-amber-600" href="#">Contact</a></li>
+        <li>
+          <router-link class="ma-2 hover:text-amber-600" to="/"
+            >Home</router-link
+          >
+        </li>
+
+        <li>
+          <router-link class="ma-2 hover:text-amber-600" to="/products"
+            >Products</router-link
+          >
+        </li>
+
+        <li>
+          <router-link class="ma-2 hover:text-amber-600" to="/bag"
+            >Your Bag</router-link
+          >
+        </li>
       </ul>
 
       <div>
