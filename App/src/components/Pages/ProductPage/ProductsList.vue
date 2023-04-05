@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ProductItem from "./ProductItem.vue";
 import ProductItemForm from "./ProductItemForm.vue";
-import { useProductStore } from "../stores/ProductStore";
+import { useProductStore } from "../../../stores/ProductStore";
 import { storeToRefs } from "pinia";
-import Item from "../Interfaces/Item";
+import Item from "../../../Interfaces/Item";
 import { Ref } from "vue";
 
 const store = useProductStore();

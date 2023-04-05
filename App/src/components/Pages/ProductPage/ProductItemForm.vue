@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useProductStore } from "../stores/ProductStore";
+import { useProductStore } from "../../../stores/ProductStore";
 
 const store = useProductStore();
 const name = ref("");

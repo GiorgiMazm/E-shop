@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { XMarkIcon } from "@heroicons/vue/24/solid";
-import { useProductStore } from "../stores/ProductStore";
+import { useProductStore } from "../../../stores/ProductStore";
 defineProps<{
   price: number;
   imgLink: string;
