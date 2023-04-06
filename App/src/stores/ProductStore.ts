@@ -37,9 +37,9 @@ export const useProductStore = defineStore("Products", () => {
     },
 
     {
-      name: "Macbook air",
-      price: 1500,
-      link: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/refurb-macbook-air-gold-m1-202010?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1634145607000",
+      name: "Batman Protein Shaker",
+      price: 15,
+      link: "https://cdn.shopify.com/s/files/1/1099/1898/products/Batman_Insulated_Stainless_Steel_Protein_Shaker_Bottle_BlenderBottle.png?v=1628611819",
       description:
         "Lorem ipsum dolor sit amet, consectetur adipisicing" +
         "            elit. Autem, error, libero. Asperiores cupiditate, ducimus eaque" +
@@ -48,7 +48,7 @@ export const useProductStore = defineStore("Products", () => {
         "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
         "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
         "            repellendus suscipit",
-      category: ItemCategory.Technique,
+      category: ItemCategory.Gym,
       id: 3,
     },
 
