@@ -15,6 +15,7 @@ const item = store.getItemById(Number(route.params.id));
     >
       <h1 class="py-4 text-5xl">Product information</h1>
       <h2 class="py-4 text-2xl">Name: {{ item.name }}</h2>
+      <h2 class="mb-4">Category: {{ item.category }}</h2>
       <div class="flex justify-center">
         <img :src="item.link" :alt="item.name" class="w-2/5 h-2/5" />
         <div class="ml-5 w-2/5">

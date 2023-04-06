@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, Ref, ref } from "vue";
-import Item from "../Interfaces/Item";
+import Item from "../types/Item";
+import { ItemCategory } from "../types/ItemCategory";
 
 export const useProductStore = defineStore("Products", () => {
   const productsList: Ref<Item[]> = ref([
@@ -16,6 +17,7 @@ export const useProductStore = defineStore("Products", () => {
         "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
         "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
         "            repellendus suscipit",
+      category: ItemCategory.Technique,
       id: 1,
     },
     {
@@ -30,6 +32,7 @@ export const useProductStore = defineStore("Products", () => {
         "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
         "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
         "            repellendus suscipit",
+      category: ItemCategory.Technique,
       id: 2,
     },
 
@@ -45,6 +48,7 @@ export const useProductStore = defineStore("Products", () => {
         "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
         "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
         "            repellendus suscipit",
+      category: ItemCategory.Technique,
       id: 3,
     },
 
@@ -60,6 +64,7 @@ export const useProductStore = defineStore("Products", () => {
         "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
         "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
         "            repellendus suscipit",
+      category: ItemCategory.Technique,
       id: 4,
     },
   ]);
@@ -78,13 +83,15 @@ export const useProductStore = defineStore("Products", () => {
     name: string,
     price: number,
     imageLink: string,
-    description: string
+    description: string,
+    category: ItemCategory
   ): void {
     const obj: Item = {
       name: name,
       price: price,
       link: imageLink,
       description: description,
+      category: category,
       id: counter.value++,
     };
     productsList.value.push(obj);

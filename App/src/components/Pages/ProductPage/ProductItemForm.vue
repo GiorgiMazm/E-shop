@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
+import { ItemCategory } from "../../../types/ItemCategory";
 
 const store = useProductStore();
 const name = ref("");
 const price = ref(0);
 const imageLink = ref("");
 const description = ref("");
+const category = ref<ItemCategory>(ItemCategory.NotSet);
 const newFormVisibility = ref(false);
 
 function toggleNewItemForm(): void {
@@ -14,6 +16,9 @@ function toggleNewItemForm(): void {
   name.value = "";
   price.value = 0;
   imageLink.value = "";
+  description.value = "";
+  description.value = "";
+  category.value = ItemCategory.NotSet;
 }
 </script>
 
@@ -44,18 +49,27 @@ function toggleNewItemForm(): void {
         v-model="imageLink"
       />
 
-      <label>Product desc</label>
+      <label>Product description</label>
       <input
         class="rounded mx-3 text-black px-3"
-        placeholder="Image of the product"
+        placeholder="Description"
         type="text"
         v-model="description"
       />
 
+      <label>Product category</label>
+      <select v-model="category" class="text-black">
+        <option :value="ItemCategory.NotSet" disabled selected hidden>
+          Not set
+        </option>
+        <option :value="ItemCategory.Technique">Technique</option>
+        <option :value="ItemCategory.Technique">Gym</option>
+      </select>
+
       <button
         class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
         @click.prevent="
-          store.addProductItem(name, price, imageLink, description);
+          store.addProductItem(name, price, imageLink, description, category);
           toggleNewItemForm();
         "
         type="submit"
