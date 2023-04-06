@@ -39,7 +39,7 @@ const store = useProductStore();
       <button
         class="my-5 rounded bg-gray-500 py-3 px-4 mr-3 hover:text-amber-500"
       >
-        <router-link to="/productItem"> Learn more</router-link>
+        <router-link :to="'/product/' + id"> Learn more</router-link>
       </button>
     </div>
   </div>
