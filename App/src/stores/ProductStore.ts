@@ -8,12 +8,28 @@ export const useProductStore = defineStore("Products", () => {
       name: "Macbook",
       price: 2000,
       link: "https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021.jpg.og.jpg?202303230456",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing" +
+        "            elit. Autem, error, libero. Asperiores cupiditate, ducimus eaque" +
+        "            exercitationem itaque maxime nobis optio pariatur praesentium quae" +
+        "            quam quis quisquam quos reiciendis sequi sint voluptatum. Accusamus" +
+        "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
+        "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
+        "            repellendus suscipit",
       id: 1,
     },
     {
       name: "Macbook pro",
       price: 2500,
       link: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202206_GEO_EMEA_LANG_DE?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1664497359389",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing" +
+        "            elit. Autem, error, libero. Asperiores cupiditate, ducimus eaque" +
+        "            exercitationem itaque maxime nobis optio pariatur praesentium quae" +
+        "            quam quis quisquam quos reiciendis sequi sint voluptatum. Accusamus" +
+        "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
+        "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
+        "            repellendus suscipit",
       id: 2,
     },
 
@@ -21,6 +37,14 @@ export const useProductStore = defineStore("Products", () => {
       name: "Macbook air",
       price: 1500,
       link: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/refurb-macbook-air-gold-m1-202010?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1634145607000",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing" +
+        "            elit. Autem, error, libero. Asperiores cupiditate, ducimus eaque" +
+        "            exercitationem itaque maxime nobis optio pariatur praesentium quae" +
+        "            quam quis quisquam quos reiciendis sequi sint voluptatum. Accusamus" +
+        "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
+        "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
+        "            repellendus suscipit",
       id: 3,
     },
 
@@ -28,6 +52,14 @@ export const useProductStore = defineStore("Products", () => {
       name: "Lenovo thinkpad",
       price: 3000,
       link: "https://laptopmedia.com/wp-content/uploads/2021/06/3-52-e1624453916559.jpg",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing" +
+        "            elit. Autem, error, libero. Asperiores cupiditate, ducimus eaque" +
+        "            exercitationem itaque maxime nobis optio pariatur praesentium quae" +
+        "            quam quis quisquam quos reiciendis sequi sint voluptatum. Accusamus" +
+        "            assumenda at consequuntur deleniti eaque, et exercitationem fugiat" +
+        "            harum incidunt iste nesciunt nobis nostrum officia quibusdam" +
+        "            repellendus suscipit",
       id: 4,
     },
   ]);
@@ -45,12 +77,14 @@ export const useProductStore = defineStore("Products", () => {
   function addProductItem(
     name: string,
     price: number,
-    imageLink: string
+    imageLink: string,
+    description: string
   ): void {
     const obj: Item = {
       name: name,
       price: price,
       link: imageLink,
+      description: description,
       id: counter.value++,
     };
     productsList.value.push(obj);

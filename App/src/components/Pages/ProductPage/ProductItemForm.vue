@@ -6,6 +6,7 @@ const store = useProductStore();
 const name = ref("");
 const price = ref(0);
 const imageLink = ref("");
+const description = ref("");
 const newFormVisibility = ref(false);
 
 function toggleNewItemForm(): void {
@@ -43,10 +44,18 @@ function toggleNewItemForm(): void {
         v-model="imageLink"
       />
 
+      <label>Product desc</label>
+      <input
+        class="rounded mx-3 text-black px-3"
+        placeholder="Image of the product"
+        type="text"
+        v-model="description"
+      />
+
       <button
         class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
         @click.prevent="
-          store.addProductItem(name, price, imageLink);
+          store.addProductItem(name, price, imageLink, description);
           toggleNewItemForm();
         "
         type="submit"
