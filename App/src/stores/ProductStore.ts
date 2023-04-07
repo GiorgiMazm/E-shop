@@ -127,6 +127,11 @@ export const useProductStore = defineStore("Products", () => {
     }
   }
 
+  // not using yet
+  function filterProducts(filterBy: ItemCategory) {
+    return productsList.value.filter((item) => item.category === filterBy);
+  }
+
   return {
     getProductList,
     getUserBagById,
