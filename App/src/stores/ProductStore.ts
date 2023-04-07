@@ -120,6 +120,13 @@ export const useProductStore = defineStore("Products", () => {
     if (bag) bag.products.splice(index, 1);
   }
 
+  function getBagSum(userId: number) {
+    const bag = getUserBagById(userId);
+    if (bag) {
+      return bag.products.reduce((sum, product) => sum + product.price, 0);
+    }
+  }
+
   return {
     getProductList,
     getUserBagById,
@@ -128,5 +135,6 @@ export const useProductStore = defineStore("Products", () => {
     removeProductItem,
     addItemToBag,
     removeItemFromBag,
+    getBagSum,
   };
 });
