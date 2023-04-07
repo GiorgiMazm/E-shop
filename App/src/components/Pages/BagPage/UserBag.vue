@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import UserBagItem from "./UserBagItem.vue";
 import { useProductStore } from "../../../stores/ProductStore";
-import { storeToRefs } from "pinia";
-import { Ref } from "vue";
 import Item from "../../../types/Item";
 
 const store = useProductStore();
-const { getProductBag: productsBag }: { getProductBag: Ref<Item[]> } =
-  storeToRefs(store);
+const bag = store.getUserBagById(1);
+let userBag: Item[];
+
+if (bag !== undefined) userBag = bag.products;
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const { getProductBag: productsBag }: { getProductBag: Ref<Item[]> } =
       <h2 class="text-2xl">Your items:</h2>
       <ul class="flex flex-wrap justify-center">
         <UserBagItem
-          v-for="(item, index) in productsBag"
+          v-for="(item, index) in userBag"
           :index="index"
           :key="index"
           :name="item.name"

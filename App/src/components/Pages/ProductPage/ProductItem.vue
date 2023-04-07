@@ -30,7 +30,7 @@ const store = useProductStore();
         Buy now
       </button>
       <button
-        @click="store.addItemToBag(id)"
+        @click="store.addItemToBag(id, 1)"
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
       >
         Add to basket

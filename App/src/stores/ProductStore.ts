@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { computed, Ref, ref } from "vue";
 import Item from "../types/Item";
 import { ItemCategory } from "../types/ItemCategory";
+import Bag from "../types/Bag";
 
 export const useProductStore = defineStore("Products", () => {
   const productsList: Ref<Item[]> = ref([
@@ -68,16 +69,16 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  const productsBag: Ref<Item[]> = ref([]);
+  const productsBag: Ref<Bag[]> = ref([{ userId: 1, products: [] }]);
   const counter = ref(5);
 
   const getProductList = computed(() => {
     return productsList.value;
   });
 
-  const getProductBag = computed(() => {
-    return productsBag.value;
-  });
+  function getUserBagById(id: number) {
+    return productsBag.value.find((bag) => bag.userId === id);
+  }
 
   function addProductItem(
     name: string,
@@ -105,25 +106,23 @@ export const useProductStore = defineStore("Products", () => {
     return productsList.value.find((item) => item.id === id);
   }
 
-  const getItemById = computed(() => {
-    return (id: number) => getProductById(id);
-  });
-
-  function addItemToBag(id: number): void {
-    const item = getItemById.value(id);
+  function addItemToBag(id: number, userId: number): void {
+    const item = getProductById(id);
     if (item !== undefined) {
-      productsBag.value.push(item);
+      const bag = getUserBagById(userId);
+      if (bag !== undefined) bag.products.push(item);
     }
   }
 
-  function removeItemFromBag(index: number): void {
-    productsBag.value.splice(index, 1);
+  function removeItemFromBag(index: number, userId: number): void {
+    const bag = getUserBagById(userId);
+    if (bag !== undefined) bag.products.splice(index, 1);
   }
 
   return {
     getProductList,
-    getProductBag,
-    getItemById,
+    getUserBagById,
+    getProductById,
     addProductItem,
     removeProductItem,
     addItemToBag,
