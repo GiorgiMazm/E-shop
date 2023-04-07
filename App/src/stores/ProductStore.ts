@@ -108,15 +108,16 @@ export const useProductStore = defineStore("Products", () => {
 
   function addItemToBag(id: number, userId: number): void {
     const item = getProductById(id);
-    if (item !== undefined) {
-      const bag = getUserBagById(userId);
-      if (bag !== undefined) bag.products.push(item);
+    const bag = getUserBagById(userId);
+
+    if (item && bag) {
+      bag.products.push(item);
     }
   }
 
   function removeItemFromBag(index: number, userId: number): void {
     const bag = getUserBagById(userId);
-    if (bag !== undefined) bag.products.splice(index, 1);
+    if (bag) bag.products.splice(index, 1);
   }
 
   return {

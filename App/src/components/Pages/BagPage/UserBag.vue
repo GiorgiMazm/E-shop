@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import UserBagItem from "./UserBagItem.vue";
 import { useProductStore } from "../../../stores/ProductStore";
-import Item from "../../../types/Item";
+import { computed } from "vue";
 
 const store = useProductStore();
-const bag = store.getUserBagById(1);
-let userBag: Item[];
-
-if (bag !== undefined) userBag = bag.products;
+const userBag = computed(() => {
+  const bag = store.getUserBagById(1);
+  return bag ? bag.products : [];
+});
 </script>
 
 <template>
