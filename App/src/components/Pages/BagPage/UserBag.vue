@@ -5,8 +5,8 @@ import { computed } from "vue";
 
 const store = useProductStore();
 const userBag = computed(() => {
-  const bag = store.getUserBagById(1);
-  return bag ? bag.products : [];
+  const user = store.getUserById(1);
+  return user ? user.bag : [];
 });
 </script>
 

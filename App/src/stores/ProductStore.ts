@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { computed, Ref, ref } from "vue";
 import Item from "../types/Item";
 import { ItemCategory } from "../types/ItemCategory";
-import Bag from "../types/Bag";
+import User from "../types/User";
 
 export const useProductStore = defineStore("Products", () => {
   const productsList: Ref<Item[]> = ref([
@@ -69,15 +69,15 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  const productsBag: Ref<Bag[]> = ref([{ userId: 1, products: [] }]);
+  const userList: Ref<User[]> = ref([{ id: 1, bag: [] }]);
   const counter = ref(5);
 
   const getProductList = computed(() => {
     return productsList.value;
   });
 
-  function getUserBagById(id: number) {
-    return productsBag.value.find((bag) => bag.userId === id);
+  function getUserById(id: number) {
+    return userList.value.find((user) => user.id === id);
   }
 
   function addProductItem(
@@ -106,24 +106,24 @@ export const useProductStore = defineStore("Products", () => {
     return productsList.value.find((item) => item.id === id);
   }
 
-  function addItemToBag(id: number, userId: number): void {
+  function addItemToUserBag(id: number, userId: number): void {
     const item = getProductById(id);
-    const bag = getUserBagById(userId);
+    const user = getUserById(userId);
 
-    if (item && bag) {
-      bag.products.push(item);
+    if (item && user) {
+      user.bag.push(item);
     }
   }
 
-  function removeItemFromBag(index: number, userId: number): void {
-    const bag = getUserBagById(userId);
-    if (bag) bag.products.splice(index, 1);
+  function removeItemFromUserBag(index: number, userId: number): void {
+    const user = getUserById(userId);
+    if (user) user.bag.splice(index, 1);
   }
 
   function getBagSum(userId: number) {
-    const bag = getUserBagById(userId);
-    if (bag) {
-      return bag.products.reduce((sum, product) => sum + product.price, 0);
+    const user = getUserById(userId);
+    if (user) {
+      return user.bag.reduce((sum, bag) => sum + bag.price, 0);
     }
   }
 
@@ -134,12 +134,12 @@ export const useProductStore = defineStore("Products", () => {
 
   return {
     getProductList,
-    getUserBagById,
+    getUserById,
     getProductById,
     addProductItem,
     removeProductItem,
-    addItemToBag,
-    removeItemFromBag,
+    addItemToUserBag,
+    removeItemFromUserBag,
     getBagSum,
   };
 });
