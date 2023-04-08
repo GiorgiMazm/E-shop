@@ -23,7 +23,7 @@ function toggleNewItemForm(): void {
 </script>
 
 <template>
-  <div>
+  <div class="container mx-auto">
     <form class="my-5" v-if="newFormVisibility">
       <label>Product name</label>
       <input

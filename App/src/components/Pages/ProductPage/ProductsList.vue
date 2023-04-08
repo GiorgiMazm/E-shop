@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ProductItem from "./ProductItem.vue";
-import ProductItemForm from "./ProductItemForm.vue";
 import { useProductStore } from "../../../stores/ProductStore";
 import { storeToRefs } from "pinia";
 import Item from "../../../types/Item";
@@ -12,9 +11,8 @@ const { getProductList: productsList }: { getProductList: Ref<Item[]> } =
 </script>
 
 <template>
-  <section class="bg-gray-500 text-gray-200 pb-7">
+  <section>
     <div class="container mx-auto">
-      <h1 class="text-4xl text-center pt-5">Our product</h1>
       <div class="flex flex-wrap justify-around mt-5">
         <ProductItem
           v-for="(item, index) in productsList"
@@ -26,7 +24,6 @@ const { getProductList: productsList }: { getProductList: Ref<Item[]> } =
           :index="index"
         />
       </div>
-      <ProductItemForm />
     </div>
   </section>
 </template>
