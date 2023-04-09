@@ -1,11 +1,9 @@
 <script lang="ts" setup>
 import { XMarkIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
+import Item from "../../../types/Item";
 defineProps<{
-  price: number;
-  link: string;
-  name: string;
-  index: number;
+  item: Item;
 }>();
 
 const store = useProductStore();
@@ -17,10 +15,10 @@ const store = useProductStore();
   >
     <XMarkIcon
       class="h-6 w-6 cursor-pointer hover:text-white absolute left-2 top-5"
-      @click.prevent="store.removeItemFromUserBag(index, 1)"
+      @click.prevent="store.removeItemFromUserBag(item.id, 1)"
     />
-    <span>{{ name }}</span>
-    <img class="h-32 mx-3 w-36" :src="link" :alt="name" />
-    <span class="mx-3">{{ price }}$</span>
+    <span>{{ item.name }}</span>
+    <img class="h-32 mx-3 w-36" :src="item.link" :alt="item.name" />
+    <span class="mx-3">{{ item.price }}$</span>
   </li>
 </template>

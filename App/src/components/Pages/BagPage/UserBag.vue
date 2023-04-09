@@ -19,9 +19,7 @@ const userBag = computed(() => {
           v-for="(item, index) in userBag"
           :index="index"
           :key="index"
-          :name="item.name"
-          :link="item.link"
-          :price="item.price"
+          :item="item"
         />
       </ul>
     </div>

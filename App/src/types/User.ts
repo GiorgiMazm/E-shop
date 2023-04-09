@@ -1,6 +1,6 @@
 import Item from "./Item";
 
 export default interface User {
-  id: number;
+  readonly id: number;
   bag: Item[];
 }
