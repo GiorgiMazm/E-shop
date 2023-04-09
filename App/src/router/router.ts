@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomePage from "../components/Pages/HomePage/HomePage.vue";
-import ProductPage from "../components/Pages/ProductPage/ProductPage.vue";
-import BagPage from "../components/Pages/BagPage/BagPage.vue";
-import ProductItemPage from "../components/Pages/ProductPage/ProductItemPage.vue";
+import HomePage from "../components/Pages/Home/HomePage.vue";
+import ProductPage from "../components/Pages/Product/ProductPage.vue";
+import BagPage from "../components/Pages/Bag/BagPage.vue";
+import ProductItemPage from "../components/Pages/Product/ProductItemPage.vue";
+import SignInPage from "../components/Pages/Login/SignInPage.vue";
+import SignUpPage from "../components/Pages/Login/SignUpPage.vue";
 
 const routes = [
   {
@@ -18,6 +20,14 @@ const routes = [
   {
     path: "/bag",
     component: BagPage,
+  },
+  {
+    path: "/signin",
+    component: SignInPage,
+  },
+  {
+    path: "/signup",
+    component: SignUpPage,
   },
 
   {

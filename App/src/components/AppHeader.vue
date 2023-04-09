@@ -21,6 +21,16 @@ import {
             Products</router-link
           >
         </li>
+        <li>
+          <router-link class="ma-2 hover:text-amber-600" to="/signin">
+            sign in</router-link
+          >
+        </li>
+        <li>
+          <router-link class="ma-2 hover:text-amber-600" to="/signup">
+            sign up</router-link
+          >
+        </li>
       </ul>
 
       <div>
