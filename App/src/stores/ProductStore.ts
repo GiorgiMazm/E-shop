@@ -77,10 +77,6 @@ export const useProductStore = defineStore("Products", () => {
     return productsList.value;
   });
 
-  function getUserById(id: number) {
-    return userList.value.find((user) => user.id === id);
-  }
-
   function addProductItem(
     name: string,
     price: number,
@@ -120,7 +116,6 @@ export const useProductStore = defineStore("Products", () => {
     getCurrentUser,
     userList,
     getProductList,
-    getUserById,
     getProductById,
     addProductItem,
     removeProductItem,
