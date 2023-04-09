@@ -69,7 +69,8 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  const userList: Ref<User[]> = ref([{ id: 1, bag: [] }]);
+
+  const userList = ref<User[]>([new User()]);
   const counter = ref(5);
 
   const getProductList = computed(() => {
@@ -106,26 +107,9 @@ export const useProductStore = defineStore("Products", () => {
     return productsList.value.find((item) => item.id === id);
   }
 
-  function addItemToUserBag(id: number, userId: number): void {
-    const item = getProductById(id);
-    const user = getUserById(userId);
-
-    if (item && user) {
-      user.bag.push(item);
-    }
-  }
-
-  function removeItemFromUserBag(index: number, userId: number): void {
-    const user = getUserById(userId);
-    if (user) user.bag.splice(index, 1);
-  }
-
-  function getBagSum(userId: number) {
-    const user = getUserById(userId);
-    if (user) {
-      return user.bag.reduce((sum, bag) => sum + bag.price, 0);
-    }
-  }
+  const getCurrentUser = computed(() => {
+    return userList.value[0];
+  });
 
   // not using yet
   function filterProducts(filterBy: ItemCategory) {
@@ -133,13 +117,12 @@ export const useProductStore = defineStore("Products", () => {
   }
 
   return {
+    getCurrentUser,
+    userList,
     getProductList,
     getUserById,
     getProductById,
     addProductItem,
     removeProductItem,
-    addItemToUserBag,
-    removeItemFromUserBag,
-    getBagSum,
   };
 });

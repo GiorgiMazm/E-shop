@@ -27,7 +27,7 @@ const item = store.getProductById(Number(route.params.id));
             Buy now
           </button>
           <button
-            @click="store.addItemToUserBag(item!.id, 1)"
+            @click="store.getCurrentUser.addItemToBag(item!)"
             class="rounded-xl bg-gray-700 py-3 px-4 m-5 hover:text-amber-500"
           >
             Add to basket

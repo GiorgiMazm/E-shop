@@ -1,12 +1,10 @@
 <script lang="ts" setup>
 import { XMarkIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
+import Item from "../../../types/Item";
 defineProps<{
-  price: number;
-  imgLink: string;
-  itemName: string;
+  item: Item;
   index: number;
-  id: number;
 }>();
 
 const store = useProductStore();
@@ -19,10 +17,10 @@ const store = useProductStore();
       @click="store.removeProductItem(index)"
     />
 
-    <h2 class="text-center my-2">{{ itemName }}</h2>
+    <h2 class="text-center my-2">{{ item.name }}</h2>
 
-    <img class="h-80 w-full" :src="imgLink" :alt="itemName" />
-    <p class="py-3">{{ price }}$</p>
+    <img class="h-80 w-full" :src="item.link" :alt="item.name" />
+    <p class="py-3">{{ item.price }}$</p>
     <div class="flex flex-wrap justify-around">
       <button
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-600"
@@ -30,7 +28,7 @@ const store = useProductStore();
         Buy now
       </button>
       <button
-        @click="store.addItemToUserBag(id, 1)"
+        @click="store.getCurrentUser.addItemToBag(item)"
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
       >
         Add to basket
@@ -39,7 +37,7 @@ const store = useProductStore();
       <button
         class="my-5 rounded bg-gray-500 py-3 px-4 mr-3 hover:text-amber-500"
       >
-        <router-link :to="'/product/' + id"> Learn more</router-link>
+        <router-link :to="'/product/' + item.id"> Learn more</router-link>
       </button>
     </div>
   </div>
