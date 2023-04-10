@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
-import { computed, reactive, Ref, ref } from "vue";
+import { computed, reactive, ref, UnwrapNestedRefs } from "vue";
 import Item from "../types/Item";
 import { ItemCategory } from "../types/ItemCategory";
 import User from "../types/User";
 
 export const useProductStore = defineStore("Products", () => {
-  const productsList: Ref<Item[]> = ref([
+  const giorgi = new User("giorgi@gmail.com", "qwert");
+  const productsList = reactive<Item[]>([
     {
       name: "Macbook",
       price: 2000,
@@ -69,13 +70,11 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  let currentUser: User;
-  const giorgi = new User("giorgi@gmail.com", "qwert");
-  const userList = ref<User[]>([giorgi]);
+  const userList = reactive<User[]>([giorgi]);
+  let currentUser: UnwrapNestedRefs<User>;
   const counter = ref(5);
-
   const getProductList = computed(() => {
-    return productsList.value;
+    return productsList;
   });
 
   function addProductItem(
@@ -93,32 +92,32 @@ export const useProductStore = defineStore("Products", () => {
       category: category,
       id: counter.value++,
     };
-    productsList.value.push(obj);
+    productsList.push(obj);
   }
 
   function removeProductItem(index: number): void {
-    productsList.value.splice(index, 1);
+    productsList.splice(index, 1);
   }
 
   function getProductById(id: number) {
-    return productsList.value.find((item) => item.id === id);
+    return productsList.find((item) => item.id === id);
   }
 
   const getCurrentUser = computed(() => {
-    return userList.value[0];
+    return currentUser;
   });
 
-  // not using yet
-  function filterProducts(filterBy: ItemCategory) {
-    return productsList.value.filter((item) => item.category === filterBy);
-  }
+  // not implementing correctly yet
+  // function filterProducts(filterBy: ItemCategory) {
+  //   return productsList.filter((item) => item.category === filterBy);
+  // }
 
   function signIn(email: string, password: string) {
-    const user = userList.value.find(
+    const user = userList.find(
       (user) => user.password === password && user.email === email
     );
-    if (user !== undefined) {
-      currentUser = reactive(user) as User;
+    if (user) {
+      currentUser = user;
     }
     console.log(user);
   }

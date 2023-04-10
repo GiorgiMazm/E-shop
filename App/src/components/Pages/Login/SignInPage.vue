@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useProductStore } from "../../../stores/ProductStore";
 
 const email = ref("");
 const password = ref("");
+const store = useProductStore();
 </script>
 
 <template>
   <section class="bg-gray-900 py-14">
     <div class="container mx-auto">
-      <form class="w-2/5 mx-auto bg-gray-200 p-5 text-gray-800 py-8">
+      <form
+        @submit.prevent="store.signIn(email, password)"
+        class="w-2/5 mx-auto bg-gray-200 p-5 text-gray-800 py-8"
+      >
         <h1 class="text-3xl text-center my-2">Sign in</h1>
         <p class="text-center">
           Use your e-com account to fully enjoy our shop
