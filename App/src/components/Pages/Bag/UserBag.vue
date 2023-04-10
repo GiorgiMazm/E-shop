@@ -5,7 +5,7 @@ import { computed } from "vue";
 
 const store = useProductStore();
 const userBag = computed(() => {
-  return store.getCurrentUser.bag;
+  return store.getCurrentUser?.bag;
 });
 </script>
 

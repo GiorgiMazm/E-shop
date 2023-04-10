@@ -28,7 +28,7 @@ const store = useProductStore();
         Buy now
       </button>
       <button
-        @click="store.getCurrentUser.addItemToBag(item)"
+        @click="store.getCurrentUser?.addItemToBag(item)"
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
       >
         Add to basket

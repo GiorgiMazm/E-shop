@@ -1,11 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useProductStore } from "../../../stores/ProductStore";
+
+const store = useProductStore();
+</script>
 
 <template>
   <div>
     <section class="p-11 bg-gray-500">
       <div class="container mx-auto text-center">
         <h1 class="text-6xl text-gray-300 font-bold pb-3">
-          Welcome to our e commerce shop!
+          Welcome to our e commerce shop
+          <span v-if="store.getCurrentUser">{{
+            store.getCurrentUser.email
+          }}</span>
+          !
         </h1>
 
         <p class="text-gray-200">

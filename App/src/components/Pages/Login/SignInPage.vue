@@ -1,17 +1,24 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
+import { useRouter } from "vue-router";
 
 const email = ref("");
 const password = ref("");
 const store = useProductStore();
+const router = useRouter();
+
+function signIn() {
+  store.signIn(email.value, password.value);
+  if (store.getCurrentUser) router.push("/");
+}
 </script>
 
 <template>
   <section class="bg-gray-900 py-14">
     <div class="container mx-auto">
       <form
-        @submit.prevent="store.signIn(email, password)"
+        @submit.prevent="signIn"
         class="w-2/5 mx-auto bg-gray-200 p-5 text-gray-800 py-8"
       >
         <h1 class="text-3xl text-center my-2">Sign in</h1>

@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
-import { computed, reactive, ref, UnwrapNestedRefs } from "vue";
+import { computed, reactive, ref } from "vue";
 import Item from "../types/Item";
 import { ItemCategory } from "../types/ItemCategory";
 import User from "../types/User";
 
 export const useProductStore = defineStore("Products", () => {
-  const giorgi = new User("giorgi@gmail.com", "qwert");
   const productsList = reactive<Item[]>([
     {
       name: "Macbook",
@@ -70,8 +69,10 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  const userList = reactive<User[]>([giorgi]);
-  let currentUser: UnwrapNestedRefs<User>;
+  const userList = reactive<User[]>([new User("giorgi@gmail.com", "qwert")]);
+  const currentUser = reactive<{ user: User | null }>({
+    user: null,
+  });
   const counter = ref(5);
   const getProductList = computed(() => {
     return productsList;
@@ -104,7 +105,7 @@ export const useProductStore = defineStore("Products", () => {
   }
 
   const getCurrentUser = computed(() => {
-    return currentUser;
+    return currentUser.user;
   });
 
   // not implementing correctly yet
@@ -117,9 +118,10 @@ export const useProductStore = defineStore("Products", () => {
       (user) => user.password === password && user.email === email
     );
     if (user) {
-      currentUser = user;
+      currentUser.user = user;
     }
     console.log(user);
+    console.log(currentUser);
   }
 
   return {
