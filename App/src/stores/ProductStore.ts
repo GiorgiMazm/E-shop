@@ -78,6 +78,9 @@ export const useProductStore = defineStore("Products", () => {
     return productsList;
   });
 
+  const getCurrentUser = computed(() => {
+    return currentUser.user;
+  });
   function addProductItem(
     name: string,
     price: number,
@@ -104,10 +107,6 @@ export const useProductStore = defineStore("Products", () => {
     return productsList.find((item) => item.id === id);
   }
 
-  const getCurrentUser = computed(() => {
-    return currentUser.user;
-  });
-
   // not implementing correctly yet
   // function filterProducts(filterBy: ItemCategory) {
   //   return productsList.filter((item) => item.category === filterBy);
@@ -117,11 +116,7 @@ export const useProductStore = defineStore("Products", () => {
     const user = userList.find(
       (user) => user.password === password && user.email === email
     );
-    if (user) {
-      currentUser.user = user;
-    }
-    console.log(user);
-    console.log(currentUser);
+    if (user) currentUser.user = user;
   }
 
   return {
