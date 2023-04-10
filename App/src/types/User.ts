@@ -1,12 +1,30 @@
 import Item from "./Item";
 
 export default class User {
+  get password(): string {
+    return this._password;
+  }
+
+  set password(value: string) {
+    this._password = value;
+  }
+  get email(): string {
+    return this._email;
+  }
+
+  set email(value: string) {
+    this._email = value;
+  }
   private static idCounter = 0;
   private _bag: Item[] = [];
   private readonly _id: number;
+  private _email: string;
+  private _password: string;
 
-  constructor() {
+  constructor(email: string, password: string) {
     this._id = ++User.idCounter;
+    this._email = email;
+    this._password = password;
   }
   get id(): number {
     return this._id;

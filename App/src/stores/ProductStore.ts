@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, Ref, ref } from "vue";
+import { computed, reactive, Ref, ref } from "vue";
 import Item from "../types/Item";
 import { ItemCategory } from "../types/ItemCategory";
 import User from "../types/User";
@@ -69,8 +69,9 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-
-  const userList = ref<User[]>([new User()]);
+  let currentUser: User;
+  const giorgi = new User("giorgi@gmail.com", "qwert");
+  const userList = ref<User[]>([giorgi]);
   const counter = ref(5);
 
   const getProductList = computed(() => {
@@ -112,6 +113,16 @@ export const useProductStore = defineStore("Products", () => {
     return productsList.value.filter((item) => item.category === filterBy);
   }
 
+  function signIn(email: string, password: string) {
+    const user = userList.value.find(
+      (user) => user.password === password && user.email === email
+    );
+    if (user !== undefined) {
+      currentUser = reactive(user) as User;
+    }
+    console.log(user);
+  }
+
   return {
     getCurrentUser,
     userList,
@@ -119,5 +130,6 @@ export const useProductStore = defineStore("Products", () => {
     getProductById,
     addProductItem,
     removeProductItem,
+    signIn,
   };
 });
