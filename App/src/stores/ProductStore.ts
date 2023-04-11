@@ -69,11 +69,11 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  const userList = reactive<User[]>([new User("giorgi@gmail.com", "qwert")]);
+  const userList = reactive<User[]>([new User("giorgi@gmail.com", "bfdsq34D")]);
   const currentUser = reactive<{ user: User | null }>({
     user: null,
   });
-  const counter = ref(5);
+  const productIdCounter = ref(5);
   const getProductList = computed(() => {
     return productsList;
   });
@@ -94,7 +94,7 @@ export const useProductStore = defineStore("Products", () => {
       link: imageLink,
       description: description,
       category: category,
-      id: counter.value++,
+      id: productIdCounter.value++,
     };
     productsList.push(obj);
   }
@@ -119,6 +119,10 @@ export const useProductStore = defineStore("Products", () => {
     if (user) currentUser.user = user;
   }
 
+  function signOut() {
+    currentUser.user = null;
+  }
+
   return {
     getCurrentUser,
     userList,
@@ -127,5 +131,6 @@ export const useProductStore = defineStore("Products", () => {
     addProductItem,
     removeProductItem,
     signIn,
+    signOut,
   };
 });
