@@ -22,6 +22,15 @@ const ifNotAuth = (
   else next("/");
 };
 
+const ifAuth = (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  const store = useProductStore();
+  if (store.getCurrentUser) next();
+  else next("/signin");
+};
 const routes = [
   {
     path: "/",
@@ -36,6 +45,7 @@ const routes = [
   {
     path: "/bag",
     component: BagPage,
+    beforeEnter: ifAuth,
   },
   {
     path: "/signin",

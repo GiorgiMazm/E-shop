@@ -41,6 +41,7 @@ function signIn() {
             class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
             placeholder="Password"
             v-model="password"
+            type="password"
           />
         </div>
 
