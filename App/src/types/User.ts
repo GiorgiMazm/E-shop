@@ -15,16 +15,53 @@ export default class User {
   set email(value: string) {
     this._email = value;
   }
+
+  get admin(): boolean {
+    return this._admin;
+  }
+
+  set admin(value: boolean) {
+    this._admin = value;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  set name(value: string) {
+    this._name = value;
+  }
+
+  get lastName(): string {
+    return this._lastName;
+  }
+
+  set lastName(value: string) {
+    this._lastName = value;
+  }
+
   private static idCounter = 0;
   private _bag: Item[] = [];
   private readonly _id: number;
   private _email: string;
   private _password: string;
+  private _admin: boolean;
+  private _name: string;
+  private _lastName: string;
 
-  constructor(email: string, password: string) {
+  constructor(
+    email: string,
+    password: string,
+    name: string,
+    lastName: string,
+    admin: boolean
+  ) {
     this._id = ++User.idCounter;
     this._email = email;
     this._password = password;
+    this._admin = admin;
+    this._name = name;
+    this._lastName = lastName;
   }
   get id(): number {
     return this._id;

@@ -69,7 +69,10 @@ export const useProductStore = defineStore("Products", () => {
       id: 4,
     },
   ]);
-  const userList = reactive<User[]>([new User("giorgi@gmail.com", "bfdsq34D")]);
+  const userList = reactive<User[]>([
+    new User("giorgi@gmail.com", "bfdsq34D", "Giorgi", "Mazm", true),
+    new User("john.cena@gmail.com", "bfdsq34D", "John", "Cena", false),
+  ]);
   const currentUser = reactive<{ user: User | null }>({
     user: null,
   });
