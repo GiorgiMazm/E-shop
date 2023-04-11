@@ -91,6 +91,7 @@ export const useProductStore = defineStore("Products", () => {
     description: string,
     category: ItemCategory
   ): void {
+    if (!getCurrentUser.value?.admin) return;
     const obj: Item = {
       name: name,
       price: price,
@@ -103,6 +104,7 @@ export const useProductStore = defineStore("Products", () => {
   }
 
   function removeProductItem(index: number): void {
+    if (!getCurrentUser.value?.admin) return;
     productsList.splice(index, 1);
   }
 

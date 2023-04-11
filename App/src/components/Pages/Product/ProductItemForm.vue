@@ -10,6 +10,7 @@ const imageLink = ref("");
 const description = ref("");
 const category = ref<ItemCategory>(ItemCategory.NotSet);
 const newFormVisibility = ref(false);
+const user = store.getCurrentUser;
 
 function toggleNewItemForm(): void {
   newFormVisibility.value = !newFormVisibility.value;
@@ -23,7 +24,7 @@ function toggleNewItemForm(): void {
 </script>
 
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto" v-if="user?.admin">
     <form class="my-5" v-if="newFormVisibility">
       <label>Product name</label>
       <input
