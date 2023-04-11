@@ -11,6 +11,7 @@ import ProductItemPage from "../components/Pages/Product/ProductItemPage.vue";
 import SignInPage from "../components/Pages/Login/SignInPage.vue";
 import SignUpPage from "../components/Pages/Login/SignUpPage.vue";
 import { useProductStore } from "../stores/ProductStore";
+import EditProductPage from "../components/Pages/Product/EditProductPage.vue";
 
 const ifNotAuth = (
   to: RouteLocationNormalized,
@@ -30,6 +31,16 @@ const ifAuth = (
   const store = useProductStore();
   if (store.getCurrentUser) next();
   else next("/signin");
+};
+
+const ifAdmin = (
+  to: RouteLocationNormalized,
+  from: RouteLocationNormalized,
+  next: NavigationGuardNext
+) => {
+  const store = useProductStore();
+  if (store.getCurrentUser?.admin) next();
+  else next("/");
 };
 const routes = [
   {
@@ -61,6 +72,12 @@ const routes = [
   {
     path: "/product/:id",
     component: ProductItemPage,
+  },
+
+  {
+    path: "/product/edit/:id",
+    component: EditProductPage,
+    beforeEnter: ifAdmin,
   },
 ];
 

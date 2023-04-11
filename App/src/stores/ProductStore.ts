@@ -108,7 +108,31 @@ export const useProductStore = defineStore("Products", () => {
     productsList.splice(index, 1);
   }
 
+  function editProductItem(
+    id: number,
+    name: string,
+    price: number,
+    description: string,
+    link: string,
+    category: ItemCategory
+  ) {
+    if (!getCurrentUser.value?.admin) return;
+    const item = getProductById(id);
+    if (item) {
+      item.name = name;
+      item.price = price;
+      item.description = description;
+      item.category = category;
+      item.link = link;
+    }
+  }
+
   function getProductById(id: number) {
+    console.log(
+      id,
+      productsList,
+      productsList.find((item) => item.id === id)
+    );
     return productsList.find((item) => item.id === id);
   }
 
@@ -135,6 +159,7 @@ export const useProductStore = defineStore("Products", () => {
     getProductById,
     addProductItem,
     removeProductItem,
+    editProductItem,
     signIn,
     signOut,
   };

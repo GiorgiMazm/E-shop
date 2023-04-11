@@ -86,7 +86,7 @@ function toggleNewItemForm(): void {
       Add new product
     </button>
     <button
-      class="mx-3 rounded-l bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
+      class="mx-3 rounded-l bg-gray-700 py-3 px-4 hover:text-amber-500"
       v-if="newFormVisibility"
       @click="toggleNewItemForm"
     >

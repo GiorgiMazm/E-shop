@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { XMarkIcon } from "@heroicons/vue/24/solid";
+import { XMarkIcon, PencilIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
 import Item from "../../../types/Item";
 defineProps<{
@@ -14,11 +14,16 @@ const user = store.getCurrentUser;
 
 <template>
   <div class="bg-red-800 w-80 m-2 p-2">
-    <XMarkIcon
-      v-if="user?.admin"
-      class="h-6 w-6 cursor-pointer hover:text-black"
-      @click="store.removeProductItem(index)"
-    />
+    <div class="flex justify-between p-3" v-if="user?.admin">
+      <XMarkIcon
+        class="h-6 w-6 cursor-pointer hover:text-black"
+        @click="store.removeProductItem(index)"
+      />
+
+      <router-link :to="'/product/edit/' + item!.id">
+        <PencilIcon class="h-6 w-6 cursor-pointer hover:text-black"
+      /></router-link>
+    </div>
 
     <h2 class="text-center my-2">{{ item.name }}</h2>
 
