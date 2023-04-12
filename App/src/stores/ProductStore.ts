@@ -127,6 +127,20 @@ export const useProductStore = defineStore("Products", () => {
     }
   }
 
+  function editUserInfo(
+    name: string,
+    lastname: string,
+    email: string,
+    password: string
+  ) {
+    if (currentUser.user) {
+      currentUser.user.name = name;
+      currentUser.user.lastName = lastname;
+      currentUser.user.email = email;
+      currentUser.user.password = password;
+    }
+  }
+
   function getProductById(id: number) {
     console.log(
       id,
@@ -160,6 +174,7 @@ export const useProductStore = defineStore("Products", () => {
     addProductItem,
     removeProductItem,
     editProductItem,
+    editUserInfo,
     signIn,
     signOut,
   };

@@ -12,6 +12,7 @@ import SignInPage from "../components/Pages/Login/SignInPage.vue";
 import SignUpPage from "../components/Pages/Login/SignUpPage.vue";
 import { useProductStore } from "../stores/ProductStore";
 import EditProductPage from "../components/Pages/Product/EditProductPage.vue";
+import UserPage from "../components/Pages/User/UserPage.vue";
 
 const ifNotAuth = (
   to: RouteLocationNormalized,
@@ -78,6 +79,13 @@ const routes = [
     path: "/product/edit/:id",
     component: EditProductPage,
     beforeEnter: ifAdmin,
+  },
+
+  {
+    path: "/user/:id",
+    component: UserPage,
+    // add route guard for check user id = page id
+    beforeEnter: ifAuth,
   },
 ];
 

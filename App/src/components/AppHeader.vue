@@ -5,6 +5,7 @@ import {
   ShoppingCartIcon,
   LockClosedIcon,
   LockOpenIcon,
+  UserCircleIcon,
 } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../stores/ProductStore";
 import { computed } from "vue";
@@ -46,6 +47,13 @@ const user = computed(() => store.getCurrentUser);
       <div v-if="user">
         <router-link class="ma-2 text-gray-300 hover:text-amber-600" to="/bag"
           ><ShoppingBagIcon class="h-8 w-8 inline mr-2" />Your Bag</router-link
+        >
+
+        <router-link
+          class="ma-2 text-gray-300 hover:text-amber-600"
+          :to="'/user/' + user.id"
+          ><UserCircleIcon class="h-8 w-8 inline mr-2 ml-4" />Your
+          account</router-link
         >
       </div>
     </div>
