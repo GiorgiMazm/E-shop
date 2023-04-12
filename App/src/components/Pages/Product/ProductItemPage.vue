@@ -32,6 +32,13 @@ const item = store.getProductById(Number(route.params.id));
           >
             Add to basket
           </button>
+
+          <router-link
+            class="rounded-xl bg-gray-400 py-4 px-10 mr-3 my-4 hover:text-amber-500"
+            :to="'/products/'"
+          >
+            Back</router-link
+          >
         </div>
       </div>
       <h2 class="mt-4">

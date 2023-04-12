@@ -19,19 +19,7 @@ const category = ref(item.category);
   <section class="bg-gray-500 text-gray-300">
     <div class="container mx-auto">
       <h1 class="text-center pt-4 text-5xl">Edit Product</h1>
-      <form
-        class="py-6 max-w-xl"
-        @submit.prevent="
-          store.editProductItem(
-            item.id,
-            name,
-            price,
-            description,
-            link,
-            category
-          )
-        "
-      >
+      <form class="py-6 max-w-xl">
         <div class="flex flex-col">
           <label>Product name</label>
           <input
@@ -53,7 +41,7 @@ const category = ref(item.category);
         <div class="flex flex-col">
           <label>Product description</label>
           <textarea
-            class="rounded text-black px-3 my-2 border-2 border-amber-500"
+            class="rounded text-black px-3 my-2 border-2 border-amber-500 h-64"
             placeholder="Name of the product"
             type="text"
             v-model="description"
@@ -69,7 +57,7 @@ const category = ref(item.category);
           />
         </div>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col mb-4">
           <label>Product category</label>
           <select
             v-model="category"
@@ -83,18 +71,30 @@ const category = ref(item.category);
           </select>
         </div>
 
-        <button
-          class="rounded-xl bg-gray-700 py-3 px-10 mr-3 hover:text-amber-500"
-          type="submit"
+        <router-link
+          @click="
+            store.editProductItem(
+              item.id,
+              name,
+              price,
+              description,
+              link,
+              category
+            )
+          "
+          class="rounded-xl bg-gray-700 py-3 px-10 mr-3 my-4 hover:text-amber-500"
+          :to="'/products/'"
         >
-          Save
-        </button>
+          Save</router-link
+        >
+
+        <router-link
+          class="rounded-xl bg-gray-700 py-3 px-10 mr-3 my-4 hover:text-amber-500"
+          :to="'/products/'"
+        >
+          Cancel</router-link
+        >
       </form>
-      <button
-        class="rounded-xl bg-gray-700 py-3 px-10 mr-3 my-4 hover:text-amber-500"
-      >
-        Cancel
-      </button>
     </div>
   </section>
 </template>
