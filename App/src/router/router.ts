@@ -84,7 +84,6 @@ const routes = [
   {
     path: "/user/:id",
     component: UserPage,
-    // add route guard for check user id = page id
     beforeEnter: ifAuth,
   },
 ];

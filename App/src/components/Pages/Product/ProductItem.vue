@@ -2,11 +2,10 @@
 import { XMarkIcon, PencilIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
 import Item from "../../../types/Item";
-defineProps<{
+const props = defineProps<{
   item: Item;
   index: number;
 }>();
-
 const store = useProductStore();
 
 const user = store.getCurrentUser;
@@ -20,15 +19,15 @@ const user = store.getCurrentUser;
         @click="store.removeProductItem(index)"
       />
 
-      <router-link :to="'/product/edit/' + item!.id">
+      <router-link :to="'/product/edit/' + props.item.id">
         <PencilIcon class="h-6 w-6 cursor-pointer hover:text-black"
       /></router-link>
     </div>
 
     <h2 class="text-center my-2">{{ item.name }}</h2>
 
-    <img class="h-80 w-full" :src="item.link" :alt="item.name" />
-    <p class="py-3">{{ item.price }}$</p>
+    <img class="h-80 w-full" :src="props.item.link" :alt="item.name" />
+    <p class="py-3">{{ props.item.price }}$</p>
     <div class="flex flex-wrap justify-around">
       <button
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-600"
@@ -45,7 +44,7 @@ const user = store.getCurrentUser;
       <button
         class="my-5 rounded bg-gray-500 py-3 px-4 mr-3 hover:text-amber-500"
       >
-        <router-link :to="'/product/' + item.id"> Learn more</router-link>
+        <router-link :to="'/product/' + props.item.id"> Learn more</router-link>
       </button>
     </div>
   </div>

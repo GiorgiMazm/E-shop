@@ -2,7 +2,7 @@
 import { XMarkIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
 import Item from "../../../types/Item";
-defineProps<{
+const props = defineProps<{
   item: Item;
 }>();
 
@@ -15,10 +15,10 @@ const store = useProductStore();
   >
     <XMarkIcon
       class="h-6 w-6 cursor-pointer hover:text-white absolute left-2 top-5"
-      @click.prevent="store.getCurrentUser?.removeItemFromBag(item.id)"
+      @click.prevent="store.getCurrentUser?.removeItemFromBag(props.item.id)"
     />
     <span>{{ item.name }}</span>
-    <img class="h-32 mx-3 w-36" :src="item.link" :alt="item.name" />
-    <span class="mx-3">{{ item.price }}$</span>
+    <img class="h-32 mx-3 w-36" :src="props.item.link" :alt="item.name" />
+    <span class="mx-3">{{ props.item.price }}$</span>
   </li>
 </template>

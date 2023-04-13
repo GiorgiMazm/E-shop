@@ -3,6 +3,7 @@ import { computed, reactive, ref } from "vue";
 import Item from "../types/Item";
 import { ItemCategory } from "../types/ItemCategory";
 import User from "../types/User";
+import Review from "../types/Review";
 
 export const useProductStore = defineStore("Products", () => {
   const productsList = reactive<Item[]>([
@@ -141,12 +142,11 @@ export const useProductStore = defineStore("Products", () => {
     }
   }
 
+  function getUserById(id: number) {
+    return userList.find((user) => user.id === id);
+  }
+
   function getProductById(id: number) {
-    console.log(
-      id,
-      productsList,
-      productsList.find((item) => item.id === id)
-    );
     return productsList.find((item) => item.id === id);
   }
 
@@ -166,6 +166,18 @@ export const useProductStore = defineStore("Products", () => {
     currentUser.user = null;
   }
 
+  const userReviewList = reactive<Review[]>([
+    {
+      author: 1,
+      description: "the best thing ever",
+      rate: 4,
+      id: 1,
+    },
+  ]);
+
+  const getUserReviewList = computed(() => {
+    return userReviewList;
+  });
   return {
     getCurrentUser,
     userList,
@@ -177,5 +189,7 @@ export const useProductStore = defineStore("Products", () => {
     editUserInfo,
     signIn,
     signOut,
+    getUserReviewList,
+    getUserById,
   };
 });

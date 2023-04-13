@@ -2,6 +2,7 @@
 import { useRoute } from "vue-router";
 import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/solid";
+import ReviewItem from "./ReviewItem.vue";
 const store = useProductStore();
 const route = useRoute();
 const item = store.getProductById(Number(route.params.id));
@@ -20,6 +21,10 @@ const item = store.getProductById(Number(route.params.id));
         <img :src="item.link" :alt="item.name" class="w-2/5 h-2/5" />
         <div class="ml-5 w-2/5">
           <h2>Description: {{ item.description }}</h2>
+          <h2 class="mt-4">
+            Price: {{ item.price }}
+            <CurrencyDollarIcon class="h-8 w-8 text-gray-300 inline" />
+          </h2>
 
           <button
             class="rounded-xl bg-gray-700 py-3 px-4 m-5 ml-0 hover:text-amber-600"
@@ -39,12 +44,17 @@ const item = store.getProductById(Number(route.params.id));
           >
             Back</router-link
           >
+
+          <div>
+            <h2 class="text-center font-bold text-3xl">Review</h2>
+            <ReviewItem
+              v-for="review in store.getUserReviewList"
+              :review="review"
+              :key="review.id"
+            />
+          </div>
         </div>
       </div>
-      <h2 class="mt-4">
-        Price: {{ item.price }}
-        <CurrencyDollarIcon class="h-8 w-8 text-gray-300 inline" />
-      </h2>
     </div>
   </section>
 </template>
