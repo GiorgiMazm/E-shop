@@ -184,6 +184,25 @@ export const useProductStore = defineStore("Products", () => {
     return getUserReviewList.value.filter((review) => review.productId === id);
   }
 
+  const reviewIdCounter = ref(1);
+
+  function addUserReview(
+    productId: number,
+    authorId: number,
+    description: string,
+    rate: number
+  ): void {
+    if (currentUser.user) {
+      userReviewList.push({
+        authorId: authorId,
+        productId: productId,
+        rate: rate,
+        description: description,
+        id: ++reviewIdCounter.value,
+      });
+    }
+  }
+
   return {
     getCurrentUser,
     userList,
@@ -198,5 +217,6 @@ export const useProductStore = defineStore("Products", () => {
     getUserReviewList,
     getUserById,
     getUserReviewByProductId,
+    addUserReview,
   };
 });

@@ -8,12 +8,28 @@ const rate = ref(10);
 const props = defineProps<{
   itemId: number;
 }>();
+
+function clearInputs() {
+  description.value = "";
+  rate.value = 10;
+}
 </script>
 
 <template>
   <section>
     <h2 class="text-center font-bold text-3xl">Reviews</h2>
-    <form>
+    <form
+      v-if="store.getCurrentUser"
+      @submit.prevent="
+        store.addUserReview(
+          props.itemId,
+          store.getCurrentUser?.id!,
+          description,
+          rate
+        );
+        clearInputs();
+      "
+    >
       <div class="flex flex-col">
         <label>Your review</label>
         <textarea

@@ -9,11 +9,11 @@ const user = useProductStore().getUserById(props.review.authorId);
 </script>
 
 <template>
-  <div>
-    <h2>from: {{ user?.name }}</h2>
+  <div class="border-2 my-3 p-3">
+    <h2>From: {{ user?.name }} {{ user?.lastName }}</h2>
     <p>
       {{ props.review.description }}
     </p>
-    <p>{{ props.review.rate }}/10</p>
+    <p>Rate: {{ props.review.rate }}/10</p>
   </div>
 </template>
