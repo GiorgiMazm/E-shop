@@ -184,6 +184,19 @@ export const useProductStore = defineStore("Products", () => {
     return getUserReviewList.value.filter((review) => review.productId === id);
   }
 
+  function getAverageRateByProductId(
+    productId: number
+  ): number | "no rate yet" {
+    const rateArray = getUserReviewByProductId(productId);
+    const sum = rateArray.reduce((accumulator, rate) => {
+      return accumulator + rate.rate;
+    }, 0);
+
+    if (sum === 0) return "no rate yet";
+
+    return parseFloat((sum / rateArray.length).toFixed(1));
+  }
+
   const reviewIdCounter = ref(1);
 
   function addUserReview(
@@ -218,5 +231,6 @@ export const useProductStore = defineStore("Products", () => {
     getUserById,
     getUserReviewByProductId,
     addUserReview,
+    getAverageRateByProductId,
   };
 });

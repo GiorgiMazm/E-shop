@@ -18,7 +18,14 @@ function clearInputs() {
 <template>
   <section>
     <h2 class="text-center font-bold text-3xl">Reviews</h2>
+    <h3 class="text-center text-2xl">
+      The average rating of this product is
+      <span class="font-bold">{{
+        store.getAverageRateByProductId(props.itemId)
+      }}</span>
+    </h3>
     <form
+      class="mt-4"
       v-if="store.getCurrentUser"
       @submit.prevent="
         store.addUserReview(
@@ -31,7 +38,7 @@ function clearInputs() {
       "
     >
       <div class="flex flex-col">
-        <label>Your review</label>
+        <label>Add your review</label>
         <textarea
           class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
           placeholder="Tell about your experience with this product..."
