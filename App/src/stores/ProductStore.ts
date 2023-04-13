@@ -168,7 +168,8 @@ export const useProductStore = defineStore("Products", () => {
 
   const userReviewList = reactive<Review[]>([
     {
-      author: 1,
+      authorId: 1,
+      productId: 2,
       description: "the best thing ever",
       rate: 4,
       id: 1,
@@ -178,6 +179,11 @@ export const useProductStore = defineStore("Products", () => {
   const getUserReviewList = computed(() => {
     return userReviewList;
   });
+
+  function getUserReviewByProductId(id: number) {
+    return getUserReviewList.value.filter((review) => review.productId === id);
+  }
+
   return {
     getCurrentUser,
     userList,
@@ -191,5 +197,6 @@ export const useProductStore = defineStore("Products", () => {
     signOut,
     getUserReviewList,
     getUserById,
+    getUserReviewByProductId,
   };
 });

@@ -48,7 +48,7 @@ const item = store.getProductById(Number(route.params.id));
           <div>
             <h2 class="text-center font-bold text-3xl">Review</h2>
             <ReviewItem
-              v-for="review in store.getUserReviewList"
+              v-for="review in store.getUserReviewByProductId(item.id)"
               :review="review"
               :key="review.id"
             />
