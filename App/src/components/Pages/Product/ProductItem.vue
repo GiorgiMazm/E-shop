@@ -41,11 +41,12 @@ const user = store.getCurrentUser;
         Add to basket
       </button>
 
-      <button
+      <router-link
+        :to="'/product/' + props.item.id"
         class="my-5 rounded bg-gray-500 py-3 px-4 mr-3 hover:text-amber-500"
       >
-        <router-link :to="'/product/' + props.item.id"> Learn more</router-link>
-      </button>
+        Learn more</router-link
+      >
     </div>
   </div>
 </template>

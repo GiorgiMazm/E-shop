@@ -2,7 +2,7 @@
 import { useRoute } from "vue-router";
 import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/solid";
-import ReviewItem from "./ReviewItem.vue";
+import ReviewSection from "./ReviewSection.vue";
 const store = useProductStore();
 const route = useRoute();
 const item = store.getProductById(Number(route.params.id));
@@ -44,15 +44,7 @@ const item = store.getProductById(Number(route.params.id));
           >
             Back</router-link
           >
-
-          <div>
-            <h2 class="text-center font-bold text-3xl">Review</h2>
-            <ReviewItem
-              v-for="review in store.getUserReviewByProductId(item.id)"
-              :review="review"
-              :key="review.id"
-            />
-          </div>
+          <ReviewSection :item-id="item.id" />
         </div>
       </div>
     </div>
