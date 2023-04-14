@@ -10,9 +10,9 @@ const store = useProductStore();
       <div class="container mx-auto text-center">
         <h1 class="text-6xl text-gray-300 font-bold pb-3">
           Welcome to our e commerce shop
-          <span v-if="store.getCurrentUser"
-            >{{ store.getCurrentUser.name }}
-            {{ store.getCurrentUser.lastName }}</span
+          <span v-if="store.userModule.getCurrentUser"
+            >{{ store.userModule.getCurrentUser?.name }}
+            {{ store.userModule.getCurrentUser?.lastName }}</span
           >
           !
         </h1>

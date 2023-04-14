@@ -3,7 +3,7 @@ import { useProductStore } from "../../../stores/ProductStore";
 import { ref } from "vue";
 
 const store = useProductStore();
-const user = store.getCurrentUser;
+const user = store.userModule.getCurrentUser;
 const name = ref("");
 const lastName = ref("");
 const email = ref("");
@@ -61,7 +61,9 @@ if (user) {
         <router-link
           class="rounded-xl bg-gray-100 py-3 px-10 mr-3 my-4 hover:text-amber-500"
           :to="'/'"
-          @click="store.editUserInfo(name, lastName, email, password)"
+          @click="
+            store.userModule.editUserInfo(name, lastName, email, password)
+          "
         >
           Save</router-link
         >

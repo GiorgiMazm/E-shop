@@ -26,11 +26,11 @@ function clearInputs() {
     </h3>
     <form
       class="mt-4"
-      v-if="store.getCurrentUser"
+      v-if="store.userModule.getCurrentUser"
       @submit.prevent="
         store.addUserReview(
           props.itemId,
-          store.getCurrentUser?.id!,
+          store.userModule.getCurrentUser?.id!,
           description,
           rate
         );

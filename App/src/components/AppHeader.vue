@@ -11,7 +11,7 @@ import { useProductStore } from "../stores/ProductStore";
 import { computed } from "vue";
 
 const store = useProductStore();
-const user = computed(() => store.getCurrentUser);
+const user = computed(() => store.userModule.getCurrentUser);
 </script>
 <template>
   <header class="bg-gray-700 py-5">
@@ -36,7 +36,7 @@ const user = computed(() => store.getCurrentUser);
           >
         </li>
 
-        <li v-if="user" @click="store.signOut()">
+        <li v-if="user" @click="store.userModule.signOut()">
           <router-link class="hover:text-amber-600" to="/">
             <LockOpenIcon class="h-6 w-6 inline mr-2" />
             Log out</router-link

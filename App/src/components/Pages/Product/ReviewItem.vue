@@ -5,7 +5,7 @@ import { useProductStore } from "../../../stores/ProductStore";
 const props = defineProps<{
   review: Review;
 }>();
-const user = useProductStore().getUserById(props.review.authorId);
+const user = useProductStore().userModule.getUserById(props.review.authorId);
 </script>
 
 <template>

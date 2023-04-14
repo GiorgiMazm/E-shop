@@ -6,7 +6,7 @@ import { ItemCategory } from "../../../types/ItemCategory";
 
 const store = useProductStore();
 const route = useRoute();
-const item = store.getProductById(Number(route.params.id))!;
+const item = store.productModule.getProductById(Number(route.params.id))!;
 
 const name = ref(item.name);
 const price = ref(item.price);
@@ -73,7 +73,7 @@ const category = ref(item.category);
 
         <router-link
           @click="
-            store.editProductItem(
+            store.productModule.editProductItem(
               item.id,
               name,
               price,

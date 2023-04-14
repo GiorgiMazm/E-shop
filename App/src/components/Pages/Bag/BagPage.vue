@@ -5,11 +5,11 @@ import { CurrencyDollarIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
 const store = useProductStore();
 
-const sum = computed(() => store.getCurrentUser?.sum);
+const sum = computed(() => store.userModule.getCurrentUser?.sum);
 </script>
 
 <template>
-  <div v-if="store.getCurrentUser">
+  <div v-if="store.userModule.getCurrentUser">
     <UserBag />
     <section class="bg-gray-500">
       <div class="container mx-auto">

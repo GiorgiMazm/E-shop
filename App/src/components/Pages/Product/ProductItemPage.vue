@@ -5,7 +5,7 @@ import { CurrencyDollarIcon } from "@heroicons/vue/24/solid";
 import ReviewSection from "./ReviewSection.vue";
 const store = useProductStore();
 const route = useRoute();
-const item = store.getProductById(Number(route.params.id));
+const item = store.productModule.getProductById(Number(route.params.id));
 </script>
 
 <template>
@@ -32,7 +32,7 @@ const item = store.getProductById(Number(route.params.id));
             Buy now
           </button>
           <button
-            @click="store.getCurrentUser?.addItemToBag(item!)"
+            @click="store.userModule.getCurrentUser?.addItemToBag(item!)"
             class="rounded-xl bg-gray-700 py-3 px-4 m-5 hover:text-amber-500"
           >
             Add to basket

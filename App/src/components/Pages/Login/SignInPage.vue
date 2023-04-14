@@ -9,8 +9,8 @@ const store = useProductStore();
 const router = useRouter();
 
 function signIn() {
-  store.signIn(email.value, password.value);
-  if (store.getCurrentUser) router.push("/");
+  store.userModule.signIn(email.value, password.value);
+  if (store.userModule.getCurrentUser) router.push("/");
 }
 </script>
 

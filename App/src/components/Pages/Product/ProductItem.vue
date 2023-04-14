@@ -8,7 +8,7 @@ const props = defineProps<{
 }>();
 const store = useProductStore();
 
-const user = store.getCurrentUser;
+const user = store.userModule.getCurrentUser;
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const user = store.getCurrentUser;
     <div class="flex justify-between p-3" v-if="user?.admin">
       <XMarkIcon
         class="h-6 w-6 cursor-pointer hover:text-black"
-        @click="store.removeProductItem(index)"
+        @click="store.productModule.removeProductItem(index)"
       />
 
       <router-link :to="'/product/edit/' + props.item.id">
@@ -35,7 +35,7 @@ const user = store.getCurrentUser;
         Buy now
       </button>
       <button
-        @click="store.getCurrentUser?.addItemToBag(item)"
+        @click="store.userModule.getCurrentUser?.addItemToBag(item)"
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
       >
         Add to basket

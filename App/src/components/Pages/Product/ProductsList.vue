@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import ProductItem from "./ProductItem.vue";
 import { useProductStore } from "../../../stores/ProductStore";
-import { storeToRefs } from "pinia";
-import Item from "../../../types/Item";
-import { Ref } from "vue";
+import { reactive } from "vue";
 
 const store = useProductStore();
-const { getProductList: productsList }: { getProductList: Ref<Item[]> } =
-  storeToRefs(store);
+const productsList = reactive(store.productModule.getProductList);
 </script>
 
 <template>

@@ -10,7 +10,7 @@ const imageLink = ref("");
 const description = ref("");
 const category = ref<ItemCategory>(ItemCategory.NotSet);
 const newFormVisibility = ref(false);
-const user = store.getCurrentUser;
+const user = store.userModule.getCurrentUser;
 
 function toggleNewItemForm(): void {
   newFormVisibility.value = !newFormVisibility.value;
@@ -70,7 +70,13 @@ function toggleNewItemForm(): void {
       <button
         class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
         @click.prevent="
-          store.addProductItem(name, price, imageLink, description, category);
+          store.productModule.addProductItem(
+            name,
+            price,
+            imageLink,
+            description,
+            category
+          );
           toggleNewItemForm();
         "
         type="submit"

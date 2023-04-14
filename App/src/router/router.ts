@@ -20,7 +20,7 @@ const ifNotAuth = (
   next: NavigationGuardNext
 ) => {
   const store = useProductStore();
-  if (!store.getCurrentUser) next();
+  if (!store.userModule.getCurrentUser) next();
   else next("/");
 };
 
@@ -30,7 +30,7 @@ const ifAuth = (
   next: NavigationGuardNext
 ) => {
   const store = useProductStore();
-  if (store.getCurrentUser) next();
+  if (store.userModule.getCurrentUser) next();
   else next("/signin");
 };
 
@@ -40,7 +40,7 @@ const ifAdmin = (
   next: NavigationGuardNext
 ) => {
   const store = useProductStore();
-  if (store.getCurrentUser?.admin) next();
+  if (store.userModule.getCurrentUser?.admin) next();
   else next("/");
 };
 const routes = [
