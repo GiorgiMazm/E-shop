@@ -4,12 +4,11 @@ import User from "../types/User";
 const currentUser = reactive<{ user: User | null }>({
   user: null,
 });
+const userList = reactive<User[]>([
+  new User("giorgi@gmail.com", "bfdsq34D", "Giorgi", "Mazm", true),
+  new User("john.cena@gmail.com", "bfdsq34D", "John", "Cena", false),
+]);
 export default {
-  userList: reactive<User[]>([
-    new User("giorgi@gmail.com", "bfdsq34D", "Giorgi", "Mazm", true),
-    new User("john.cena@gmail.com", "bfdsq34D", "John", "Cena", false),
-  ]),
-
   editUserInfo(
     name: string,
     lastname: string,
@@ -25,11 +24,11 @@ export default {
   },
 
   getUserById(id: number) {
-    return this.userList.find((user) => user.id === id);
+    return userList.find((user) => user.id === id);
   },
 
   signIn(email: string, password: string) {
-    const user = this.userList.find(
+    const user = userList.find(
       (user) => user.password === password && user.email === email
     );
     if (user) currentUser.user = user;

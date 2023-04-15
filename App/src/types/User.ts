@@ -72,7 +72,7 @@ export default class User {
   }
 
   get sum(): number {
-    return this.bag.reduce((sum, bag) => sum + bag.price, 0);
+    return this.bag.reduce((sum, bag) => sum + Number(bag.price), 0);
   }
 
   addItemToBag(item: Item) {

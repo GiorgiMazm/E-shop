@@ -21,14 +21,14 @@ function clearInputs() {
     <h3 class="text-center text-2xl">
       The average rating of this product is
       <span class="font-bold">{{
-        store.getAverageRateByProductId(props.itemId)
+        store.reviewModule.getAverageRateByProductId(props.itemId)
       }}</span>
     </h3>
     <form
       class="mt-4"
       v-if="store.userModule.getCurrentUser"
       @submit.prevent="
-        store.addUserReview(
+        store.reviewModule.addUserReview(
           props.itemId,
           store.userModule.getCurrentUser?.id!,
           description,
@@ -68,7 +68,9 @@ function clearInputs() {
 
     <div>
       <ReviewItem
-        v-for="review in store.getUserReviewByProductId(props.itemId)"
+        v-for="review in store.reviewModule.getUserReviewByProductId(
+          props.itemId
+        )"
         :review="review"
         :key="review.id"
       />
