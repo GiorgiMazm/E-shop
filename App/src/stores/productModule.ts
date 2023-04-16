@@ -114,6 +114,10 @@ export default {
     if (!userModule.getCurrentUser.value?.admin) return;
     const index = productsList.findIndex((item) => item.id === id);
     if (index !== -1) productsList.splice(index, 1);
+
+    userModule.getUserList.value.forEach((user) => {
+      user.bag = user.bag.filter((item) => item.id !== id);
+    });
   },
 
   getProductById(id: number) {

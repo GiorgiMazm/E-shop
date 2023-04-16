@@ -8,6 +8,14 @@ export default class User {
   set password(value: string) {
     this._password = value;
   }
+
+  get bag(): Item[] {
+    return this._bag;
+  }
+  set bag(value: Item[]) {
+    this._bag = value;
+  }
+
   get email(): string {
     return this._email;
   }
@@ -65,10 +73,6 @@ export default class User {
   }
   get id(): number {
     return this._id;
-  }
-
-  get bag(): Item[] {
-    return this._bag;
   }
 
   get sum(): number {

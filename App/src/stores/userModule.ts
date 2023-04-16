@@ -44,4 +44,8 @@ export default {
     productModule.setFilter(ItemCategory.NotSet);
     return currentUser.user;
   }),
+
+  getUserList: computed(() => {
+    return userList;
+  }),
 };
