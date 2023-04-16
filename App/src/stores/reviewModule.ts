@@ -7,6 +7,7 @@ const userReviewList = reactive<Review[]>([
   {
     authorId: 1,
     productId: 2,
+    title: "I am speechless",
     description: "the best thing ever",
     rate: 4,
     id: 1,
@@ -35,6 +36,7 @@ export default {
   addUserReview(
     productId: number,
     authorId: number,
+    title: string,
     description: string,
     rate: number
   ): void {
@@ -42,6 +44,7 @@ export default {
       userReviewList.push({
         authorId: authorId,
         productId: productId,
+        title: title,
         rate: rate,
         description: description,
         id: ++reviewIdCounter.value,

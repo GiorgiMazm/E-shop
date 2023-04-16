@@ -9,11 +9,12 @@ const user = useProductStore().userModule.getUserById(props.review.authorId);
 </script>
 
 <template>
-  <div class="border-2 my-3 p-3">
-    <h2>From: {{ user?.name }} {{ user?.lastName }}</h2>
+  <article class="border-2 my-3 p-3 text-center">
+    <h2 class="font-bold">{{ props.review.title }}</h2>
     <p>
       {{ props.review.description }}
     </p>
     <p>Rate: {{ props.review.rate }}/10</p>
-  </div>
+    <p>From: {{ user?.name }} {{ user?.lastName }}</p>
+  </article>
 </template>

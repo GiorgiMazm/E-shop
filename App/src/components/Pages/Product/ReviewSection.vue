@@ -3,6 +3,7 @@ import ReviewItem from "./ReviewItem.vue";
 import { ref } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
 const store = useProductStore();
+const title = ref("");
 const description = ref("");
 const rate = ref(10);
 const props = defineProps<{
@@ -20,9 +21,9 @@ function clearInputs() {
     <h2 class="text-center font-bold text-3xl">Reviews</h2>
     <h3 class="text-center text-2xl">
       The average rating of this product is
-      <span class="font-bold">{{
+      <mark class="font-bold bg-gray-500">{{
         store.reviewModule.getAverageRateByProductId(props.itemId)
-      }}</span>
+      }}</mark>
     </h3>
     <form
       class="mt-4"
@@ -31,12 +32,21 @@ function clearInputs() {
         store.reviewModule.addUserReview(
           props.itemId,
           store.userModule.getCurrentUser?.id!,
+          title,
           description,
           rate
         );
         clearInputs();
       "
     >
+      <div class="flex flex-col">
+        <label>Review title</label>
+        <input
+          class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
+          placeholder="Title..."
+          v-model="title"
+        />
+      </div>
       <div class="flex flex-col">
         <label>Add your review</label>
         <textarea
