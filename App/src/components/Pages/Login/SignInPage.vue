@@ -1,12 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { Ref, ref } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
 import { useRouter } from "vue-router";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/20/solid";
 
 const email = ref("");
 const password = ref("");
 const store = useProductStore();
 const router = useRouter();
+const passwordType: Ref<"password" | "text"> = ref("password");
+
+const passwordVisibility = ref(false);
+function passwordVisibilityToggle() {
+  passwordVisibility.value = !passwordVisibility.value;
+  if (passwordType.value === "password") passwordType.value = "text";
+  else passwordType.value = "password";
+}
 
 function signIn() {
   store.userModule.signIn(email.value, password.value);
@@ -35,13 +44,23 @@ function signIn() {
           />
         </div>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col relative">
           <label>Password</label>
           <input
-            class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
+            class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600 block"
             placeholder="Password"
             v-model="password"
-            type="password"
+            :type="passwordType"
+          />
+          <EyeIcon
+            v-if="!passwordVisibility"
+            @click="passwordVisibilityToggle"
+            class="w-5 h-5 cursor-pointer absolute right-5 top-11"
+          />
+          <EyeSlashIcon
+            v-if="passwordVisibility"
+            @click="passwordVisibilityToggle"
+            class="w-5 h-5 cursor-pointer absolute right-5 top-11"
           />
         </div>
 
