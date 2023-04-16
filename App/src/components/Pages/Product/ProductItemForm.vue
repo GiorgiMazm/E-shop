@@ -64,7 +64,7 @@ function toggleNewItemForm(): void {
           Not set
         </option>
         <option :value="ItemCategory.Technique">Technique</option>
-        <option :value="ItemCategory.Technique">Gym</option>
+        <option :value="ItemCategory.Gym">Gym</option>
       </select>
 
       <button

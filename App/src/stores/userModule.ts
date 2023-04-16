@@ -1,5 +1,7 @@
 import { computed, reactive } from "vue";
 import User from "../types/User";
+import productModule from "./productModule";
+import { ItemCategory } from "../types/ItemCategory";
 
 const currentUser = reactive<{ user: User | null }>({
   user: null,
@@ -39,6 +41,7 @@ export default {
   },
 
   getCurrentUser: computed(() => {
+    productModule.setFilter(ItemCategory.NotSet);
     return currentUser.user;
   }),
 };

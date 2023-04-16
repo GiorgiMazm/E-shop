@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import ProductItem from "./ProductItem.vue";
 import { useProductStore } from "../../../stores/ProductStore";
-import { reactive } from "vue";
+import { computed } from "vue";
 
 const store = useProductStore();
-const productsList = reactive(store.productModule.getProductList);
+
+const productsList = computed(() => store.productModule.getFilteredProductList);
 </script>
 
 <template>

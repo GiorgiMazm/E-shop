@@ -68,12 +68,29 @@ const productsList = reactive<Item[]>([
   },
 ]);
 const productIdCounter = ref(5);
+const filter = ref<ItemCategory>(ItemCategory.NotSet);
 
 export default {
   getProductList: computed(() => {
     return productsList;
   }),
 
+  setFilter(value: ItemCategory) {
+    filter.value = value;
+  },
+
+  getFilteredProductList: computed(() => {
+    if (filter.value === ItemCategory.Gym)
+      return productsList.filter(
+        (product) => product.category === ItemCategory.Gym
+      );
+
+    if (filter.value === ItemCategory.Technique)
+      return productsList.filter(
+        (product) => product.category === ItemCategory.Technique
+      );
+    return productsList;
+  }),
   addProductItem(
     name: string,
     price: number,
