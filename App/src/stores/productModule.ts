@@ -110,9 +110,10 @@ export default {
     productsList.push(obj);
   },
 
-  removeProductItem(index: number): void {
+  removeProductItem(id: number): void {
     if (!userModule.getCurrentUser.value?.admin) return;
-    productsList.splice(index, 1);
+    const index = productsList.findIndex((item) => item.id === id);
+    if (index !== -1) productsList.splice(index, 1);
   },
 
   getProductById(id: number) {

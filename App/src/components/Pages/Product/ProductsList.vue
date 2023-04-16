@@ -12,12 +12,7 @@ const productsList = computed(() => store.productModule.getFilteredProductList);
   <section>
     <div class="container mx-auto">
       <div class="flex flex-wrap justify-around mt-5">
-        <ProductItem
-          v-for="(item, index) in productsList"
-          :item="item"
-          :key="item.id"
-          :index="index"
-        />
+        <ProductItem v-for="item in productsList" :item="item" :key="item.id" />
       </div>
     </div>
   </section>

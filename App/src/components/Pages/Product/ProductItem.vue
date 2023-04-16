@@ -4,7 +4,6 @@ import { useProductStore } from "../../../stores/ProductStore";
 import Item from "../../../types/Item";
 const props = defineProps<{
   item: Item;
-  index: number;
 }>();
 const store = useProductStore();
 
@@ -16,7 +15,7 @@ const user = store.userModule.getCurrentUser;
     <div class="flex justify-between p-3" v-if="user?.admin">
       <XMarkIcon
         class="h-6 w-6 cursor-pointer hover:text-black"
-        @click="store.productModule.removeProductItem(index)"
+        @click="store.productModule.removeProductItem(props.item.id)"
       />
 
       <router-link :to="'/product/edit/' + props.item.id">
