@@ -1,6 +1,7 @@
 import { computed, reactive, ref } from "vue";
 import Review from "../types/Review";
 import userModule from "./userModule";
+import UserModule from "./userModule";
 
 const reviewIdCounter = ref(1);
 const userReviewList = reactive<Review[]>([
@@ -50,5 +51,11 @@ export default {
         id: ++reviewIdCounter.value,
       });
     }
+  },
+
+  removeUserReview(id: number) {
+    if (!UserModule.getCurrentUser.value?.admin) return;
+    const index = userReviewList.findIndex((review) => review.id === id);
+    if (index !== -1) userReviewList.splice(index, 1);
   },
 };
