@@ -36,6 +36,13 @@ export default {
     if (user) currentUser.user = user;
   },
 
+  signUp(name: string, lastName: string, email: string, password: string) {
+    const user = new User(email, password, name, lastName, false);
+    userList.push(user);
+    currentUser.user = user;
+    console.log(user);
+  },
+
   signOut() {
     currentUser.user = null;
   },
