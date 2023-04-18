@@ -18,7 +18,7 @@ const keyWord = ref("");
       <div>
         <label class="text-gray-100">Filter</label>
         <select
-          @change="store.productModule.setFilteredProductList(filter)"
+          @change="store.productModule.setFilteredProductList(filter, keyWord)"
           v-model="filter"
           class="text-black ml-2"
         >
@@ -29,7 +29,7 @@ const keyWord = ref("");
 
         <label class="text-gray-100 mx-3">Find</label>
         <input
-          @keyup="store.productModule.getSearchedProductList(keyWord)"
+          @keyup="store.productModule.setFilteredProductList(filter, keyWord)"
           class="text-gray-900 px-2"
           v-model="keyWord"
           type="text"

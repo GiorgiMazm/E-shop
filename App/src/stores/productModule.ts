@@ -68,8 +68,6 @@ const productsList = reactive<Item[]>([
   },
 ]);
 const productIdCounter = ref(5);
-const filter = ref<ItemCategory>(ItemCategory.NotSet);
-
 const fakeList = reactive<{ array: Item[] }>({ array: productsList });
 
 export default {
@@ -81,28 +79,28 @@ export default {
     return fakeList;
   }),
 
-  setFilter(value: ItemCategory) {
-    filter.value = value;
-  },
-
-  setFilteredProductList(filter: ItemCategory) {
+  setFilteredProductList(filter: ItemCategory, keyWord: string) {
     if (filter === ItemCategory.Gym) {
-      fakeList.array = productsList.filter(
-        (product) => product.category === ItemCategory.Gym
-      );
+      fakeList.array = productsList.filter((product) => {
+        return (
+          product.category === ItemCategory.Gym &&
+          product.name.toLowerCase().includes(keyWord.toLowerCase().trim())
+        );
+      });
     } else if (filter === ItemCategory.Technique)
-      fakeList.array = productsList.filter(
-        (product) => product.category === ItemCategory.Technique
+      fakeList.array = productsList.filter((product) => {
+        return (
+          product.category === ItemCategory.Technique &&
+          product.name.toLowerCase().includes(keyWord.toLowerCase().trim())
+        );
+      });
+    else {
+      fakeList.array = productsList.filter((product) =>
+        product.name.toLowerCase().includes(keyWord.toLowerCase().trim())
       );
-    else fakeList.array = productsList;
-    console.log(filter === ItemCategory.Gym, filter, fakeList);
+    }
   },
 
-  getSearchedProductList(keyWord: string) {
-    fakeList.array = productsList.filter((product) =>
-      product.name.toLowerCase().includes(keyWord.toLowerCase().trim())
-    );
-  },
   addProductItem(
     name: string,
     price: number,
