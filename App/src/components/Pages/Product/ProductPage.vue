@@ -7,6 +7,8 @@ import { useProductStore } from "../../../stores/ProductStore";
 
 const filter = ref<ItemCategory>(ItemCategory.NotSet);
 const store = useProductStore();
+
+const keyWord = ref("");
 </script>
 
 <template>
@@ -16,7 +18,7 @@ const store = useProductStore();
       <div>
         <label class="text-gray-100">Filter</label>
         <select
-          @change="store.productModule.setFilter(filter)"
+          @change="store.productModule.setFilteredProductList(filter)"
           v-model="filter"
           class="text-black ml-2"
         >
@@ -24,6 +26,14 @@ const store = useProductStore();
           <option :value="ItemCategory.Technique">Technique</option>
           <option :value="ItemCategory.Gym">Gym</option>
         </select>
+
+        <label class="text-gray-100 mx-3">Find</label>
+        <input
+          @keyup="store.productModule.getSearchedProductList(keyWord)"
+          class="text-gray-900 px-2"
+          v-model="keyWord"
+          type="text"
+        />
       </div>
       <ProductsList />
       <ProductItemForm />

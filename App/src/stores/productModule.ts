@@ -70,27 +70,39 @@ const productsList = reactive<Item[]>([
 const productIdCounter = ref(5);
 const filter = ref<ItemCategory>(ItemCategory.NotSet);
 
+const fakeList = reactive<{ array: Item[] }>({ array: productsList });
+
 export default {
   getProductList: computed(() => {
     return productsList;
+  }),
+
+  getFakeProductList: computed(() => {
+    return fakeList;
   }),
 
   setFilter(value: ItemCategory) {
     filter.value = value;
   },
 
-  getFilteredProductList: computed(() => {
-    if (filter.value === ItemCategory.Gym)
-      return productsList.filter(
+  setFilteredProductList(filter: ItemCategory) {
+    if (filter === ItemCategory.Gym) {
+      fakeList.array = productsList.filter(
         (product) => product.category === ItemCategory.Gym
       );
-
-    if (filter.value === ItemCategory.Technique)
-      return productsList.filter(
+    } else if (filter === ItemCategory.Technique)
+      fakeList.array = productsList.filter(
         (product) => product.category === ItemCategory.Technique
       );
-    return productsList;
-  }),
+    else fakeList.array = productsList;
+    console.log(filter === ItemCategory.Gym, filter, fakeList);
+  },
+
+  getSearchedProductList(keyWord: string) {
+    fakeList.array = productsList.filter((product) =>
+      product.name.toLowerCase().includes(keyWord.toLowerCase().trim())
+    );
+  },
   addProductItem(
     name: string,
     price: number,
