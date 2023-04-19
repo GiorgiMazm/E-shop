@@ -4,11 +4,16 @@ import ProductItemForm from "./ProductItemForm.vue";
 import { ItemCategory } from "../../../types/ItemCategory";
 import { ref } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
+import { onBeforeRouteLeave } from "vue-router";
 
 const filter = ref<ItemCategory>(ItemCategory.NotSet);
 const store = useProductStore();
 
 const keyWord = ref("");
+
+onBeforeRouteLeave(() => {
+  store.productModule.setFilteredProductList(ItemCategory.NotSet, "");
+});
 </script>
 
 <template>
