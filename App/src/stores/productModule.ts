@@ -118,12 +118,14 @@ export default {
       id: productIdCounter.value++,
     };
     productsList.push(obj);
+    fakeList.array = productsList;
   },
 
   removeProductItem(id: number): void {
     if (!userModule.getCurrentUser.value?.admin) return;
     const index = productsList.findIndex((item) => item.id === id);
     if (index !== -1) productsList.splice(index, 1);
+    fakeList.array = productsList;
 
     userModule.getUserList.value.forEach((user) => {
       user.bag = user.bag.filter((item) => item.id !== id);
