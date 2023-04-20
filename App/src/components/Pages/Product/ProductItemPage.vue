@@ -3,9 +3,19 @@ import { useRoute } from "vue-router";
 import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/solid";
 import ReviewSection from "./ReviewSection.vue";
+import { ref } from "vue";
 const store = useProductStore();
 const route = useRoute();
 const item = store.productModule.getProductById(Number(route.params.id));
+const quantity = ref(1);
+
+function addSomeItems() {
+  if (store.userModule.getCurrentUser) {
+    store.userModule.getCurrentUser.addItemToBag(item!, quantity.value);
+    alert("item was added to your bag");
+  } else alert("You have to log in to add item to your bag");
+  quantity.value = 1;
+}
 </script>
 
 <template>
@@ -26,13 +36,21 @@ const item = store.productModule.getProductById(Number(route.params.id));
             <CurrencyDollarIcon class="h-8 w-8 text-gray-300 inline" />
           </h2>
 
+          <div class="flex flex-col">
+            <label>quantity</label>
+            <input
+              class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
+              v-model="quantity"
+            />
+          </div>
+
           <button
             class="rounded-xl bg-gray-700 py-3 px-4 m-5 ml-0 hover:text-amber-600"
           >
             Buy now
           </button>
           <button
-            @click="store.userModule.getCurrentUser?.addItemToBag(item!)"
+            @click="addSomeItems"
             class="rounded-xl bg-gray-700 py-3 px-4 m-5 hover:text-amber-500"
           >
             Add to basket

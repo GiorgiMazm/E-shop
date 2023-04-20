@@ -79,8 +79,10 @@ export default class User {
     return this.bag.reduce((sum, bag) => sum + Number(bag.price), 0);
   }
 
-  addItemToBag(item: Item) {
-    this.bag.push(item);
+  addItemToBag(item: Item, quantity: number) {
+    for (let i = 0; i < quantity; i++) {
+      this.bag.push(item);
+    }
   }
 
   removeItemFromBag(id: number) {

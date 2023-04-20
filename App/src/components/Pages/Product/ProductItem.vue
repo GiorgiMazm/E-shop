@@ -8,6 +8,13 @@ const props = defineProps<{
 const store = useProductStore();
 
 const user = store.userModule.getCurrentUser;
+
+function addItemToBag() {
+  if (store.userModule.getCurrentUser) {
+    store.userModule.getCurrentUser.addItemToBag(props.item, 1);
+    alert("item was added to your bag");
+  } else alert("You have to log in to add item to your bag");
+}
 </script>
 
 <template>
@@ -34,7 +41,7 @@ const user = store.userModule.getCurrentUser;
         Buy now
       </button>
       <button
-        @click="store.userModule.getCurrentUser?.addItemToBag(item)"
+        @click="addItemToBag"
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
       >
         Add to basket
