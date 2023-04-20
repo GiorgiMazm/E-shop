@@ -85,6 +85,10 @@ export default class User {
     }
   }
 
+  clearBag() {
+    this._bag = [];
+  }
+
   removeItemFromBag(id: number) {
     const index = this.bag.findIndex((product) => product.id === id);
     this.bag.splice(index, 1);

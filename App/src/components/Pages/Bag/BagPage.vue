@@ -10,14 +10,20 @@ const sum = computed(() => store.userModule.getCurrentUser?.sum);
 
 <template>
   <div v-if="store.userModule.getCurrentUser">
-    <UserBag />
     <section class="bg-gray-500">
       <div class="container mx-auto">
         <h2 class="text-4xl text-center py-5">
+          <button
+            class="rounded-xl bg-gray-700 py-3 px-4 mb-3 hover:text-amber-600"
+            @click="store.userModule.getCurrentUser?.clearBag()"
+          >
+            Clear bag
+          </button>
           Total is: {{ sum }}
           <CurrencyDollarIcon class="h-12 w-12 text-black inline" />
         </h2>
       </div>
     </section>
+    <UserBag />
   </div>
 </template>
