@@ -21,6 +21,11 @@ const sum = computed(() => store.userModule.getCurrentUser?.sum);
           </button>
           Total is: {{ sum }}
           <CurrencyDollarIcon class="h-12 w-12 text-black inline" />
+          <button
+            class="rounded-xl bg-gray-700 py-3 px-4 ml-3 hover:text-amber-600"
+          >
+            Process to checkout
+          </button>
         </h2>
       </div>
     </section>

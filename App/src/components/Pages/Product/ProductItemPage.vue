@@ -39,7 +39,7 @@ function addSomeItems() {
           <div class="flex flex-col">
             <label>quantity</label>
             <input
-              class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
+              class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600 w-14"
               v-model="quantity"
             />
           </div>
