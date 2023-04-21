@@ -1,18 +1,44 @@
-# Vue 3 + TypeScript + Vite
+## E-shop
+E-shop is a simple e-commerce web application built with Vue.js and TypeScript. The application allows users to browse products, add products to their cart, and checkout.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Table of Contents
+1. Installation
+2. Usage
+3. Technologies
+4. Contributing
+5. License
 
-## Recommended IDE Setup
+## Installation
+To install the E-shop application, follow these steps:
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+1. Clone the repository: git clone https://github.com/GiorgiMazm/E-shop.git  
+2. cd/App
+3. Install dependencies: npm install  
+4. Build the application: npm run build
 
-## Type Support For `.vue` Imports in TS
+## Usage
+To use the E-shop application, follow these steps:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Start the development server: npm run serve
+Open the application in your browser: http://localhost:8080
+The application allows users to browse products, add products to their cart, and checkout. Users can create an account to save their personal information and view their order history.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Technologies
+The E-shop application was built with the following technologies:
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+1. Vue.js
+2. TypeScript
+3. Pinia (for state management)
+4. Vue Router (for routing)
+5. Axios (for API calls)
+6. Tailwind CSS (for styling)
+## Contributing
+Contributions to the E-shop application are welcome. To contribute, follow these steps:
+
+1. Fork the repository
+2. Create a new branch: git checkout -b feature/your-feature
+3. Make your changes
+4. Push to the branch: git push origin feature/your-feature
+5. Submit a pull request
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
