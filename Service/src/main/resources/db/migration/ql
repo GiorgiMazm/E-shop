@@ -1,13 +1,11 @@
 drop table if exists product;
-DROP TYPE if exists category_enum;
 
-CREATE TYPE category_enum AS ENUM ('NotSet', 'Technique', 'Gym');
 CREATE TABLE product
 (
     id           serial not null primary key,
     name         text   not null,
     description  text   not null,
-    category   category_enum   not null,
+    category   text   not null,
     link text   not null,
     price integer not null
 );
