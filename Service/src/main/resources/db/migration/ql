@@ -1,0 +1,20 @@
+drop table if exists product;
+DROP TYPE if exists category_enum;
+
+CREATE TYPE category_enum AS ENUM ('NotSet', 'Technique', 'Gym');
+CREATE TABLE product
+(
+    id           serial not null primary key,
+    name         text   not null,
+    description  text   not null,
+    category   category_enum   not null,
+    link text   not null,
+    price integer not null
+);
+
+insert into product(name, description, category, link, price)
+values ('Iphone', 'the last version of iphone is very good!', 'Technique', 'ssilka', 1000);
+
+
+insert into product(name, description, category, link, price)
+values ('Iphone', 'the last version of iphone is very good!', 'Gym', 'ssilka', 1000)
