@@ -67,7 +67,7 @@ const category = ref(item.category);
               Not set
             </option>
             <option :value="ItemCategory.Technique">Technique</option>
-            <option :value="ItemCategory.Technique">Gym</option>
+            <option :value="ItemCategory.Gym">Gym</option>
           </select>
         </div>
 

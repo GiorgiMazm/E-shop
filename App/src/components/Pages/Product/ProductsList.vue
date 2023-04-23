@@ -5,9 +5,7 @@ import { computed } from "vue";
 
 const store = useProductStore();
 
-const productsList = computed(
-  () => store.productModule.getFakeProductList.array
-);
+const productsList = computed(() => store.productModule.getProductList);
 </script>
 
 <template>
