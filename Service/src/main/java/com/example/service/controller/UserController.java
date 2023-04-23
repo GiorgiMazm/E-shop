@@ -1,6 +1,6 @@
-
 package com.example.service.controller;
 
+import com.example.service.model.Product;
 import com.example.service.model.User;
 import com.example.service.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +43,17 @@ public class UserController {
         user.setPassword(newUser.getPassword());
         user.setAdmin(newUser.isAdmin());
         user.setBag(newUser.getBag());
+
+        userRepository.save(user);
+    }
+
+
+    @PutMapping(path = "editUserBag/{userId}")
+    public void updateUserBag(@PathVariable(value = "userId") Long userId, @RequestBody List<Product> newProducts) {
+        User user = userRepository.findById(userId).get();
+
+        user.getBag().clear();
+        user.getBag().addAll(newProducts);
 
         userRepository.save(user);
     }

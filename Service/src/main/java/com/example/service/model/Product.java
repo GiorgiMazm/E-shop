@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity(name = "product")
 @Data

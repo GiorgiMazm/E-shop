@@ -2,6 +2,7 @@ package com.example.service.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.List;
 
 @Data
 @Entity(name = "user_account")
@@ -23,9 +24,16 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "bag", nullable = false)
-    private String bag;
+
 
     @Column(name = "admin", nullable = false)
     private boolean admin;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_product",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> bag;
 }
