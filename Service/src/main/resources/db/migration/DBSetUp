@@ -1,0 +1,26 @@
+drop table if exists product;
+
+CREATE TABLE product
+(
+    id           serial not null primary key,
+    name         text   not null,
+    description  text   not null,
+    category   text   not null,
+    link text   not null,
+    price integer not null
+);
+
+insert into product(name, description, category, link, price)
+values ('Macbook', 'very good', 'Technique', 'https://www.apple.com/newsroom/images/product/mac/standard/Apple_MacBook-Pro_14-16-inch_10182021.jpg.og.jpg?202303230456', 2000);
+
+insert into product(name, description, category, link, price)
+values ('Macbook', 'the!', 'Technique', 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202206_GEO_EMEA_LANG_DE?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1664497359389', 2500);
+
+insert into product(name, description, category, link, price)
+values ('Vika', 'the!', 'Gym', 'https://i.etsystatic.com/25931038/r/il/cd57b6/3218252476/il_fullxfull.3218252476_jkcq.jpg', 666);
+
+insert into product(name, description, category, link, price)
+values ('Batman Protein Shaker', 'the!', 'Gym', 'https://cdn.shopify.com/s/files/1/1099/1898/products/Batman_Insulated_Stainless_Steel_Protein_Shaker_Bottle_BlenderBottle.png?v=1628611819', 15);
+
+insert into product(name, description, category, link, price)
+values ('Lenovo thinkpad', 'the!', 'Technique', 'https://laptopmedia.com/wp-content/uploads/2021/06/3-52-e1624453916559.jpg', 3000);
