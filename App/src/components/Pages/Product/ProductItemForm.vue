@@ -26,46 +26,56 @@ function toggleNewItemForm(): void {
 <template>
   <div class="container mx-auto" v-if="user?.admin">
     <form class="my-5" v-if="newFormVisibility">
-      <label>Product name</label>
-      <input
-        class="rounded mx-3 text-black px-3"
-        placeholder="Name of the product"
-        type="text"
-        v-model="name"
-      />
+      <div class="my-4">
+        <label>Product name</label>
+        <input
+          class="rounded mx-3 text-black px-3"
+          placeholder="Name of the product"
+          type="text"
+          v-model="name"
+        />
+      </div>
 
-      <label>Product price</label>
-      <input
-        class="rounded mx-3 text-black px-3"
-        placeholder="Price of the product"
-        type="text"
-        v-model="price"
-      />
+      <div class="my-4">
+        <label>Product price</label>
+        <input
+          class="rounded mx-3 text-black px-3"
+          placeholder="Price of the product"
+          type="text"
+          v-model="price"
+        />
+      </div>
 
-      <label>Product image</label>
-      <input
-        class="rounded mx-3 text-black px-3"
-        placeholder="Image of the product"
-        type="text"
-        v-model="imageLink"
-      />
+      <div class="my-4">
+        <label>Product image</label>
+        <input
+          class="rounded mx-3 text-black px-3"
+          placeholder="Image of the product"
+          type="text"
+          v-model="imageLink"
+        />
+      </div>
 
-      <label>Product description</label>
-      <input
-        class="rounded mx-3 text-black px-3"
-        placeholder="Description"
-        type="text"
-        v-model="description"
-      />
+      <div class="my-4">
+        <label>Product description</label>
+        <textarea
+          class="rounded mx-3 text-black px-3"
+          placeholder="Description"
+          type="text"
+          v-model="description"
+        />
+      </div>
 
-      <label>Product category</label>
-      <select v-model="category" class="text-black">
-        <option :value="ItemCategory.NotSet" disabled selected hidden>
-          Not set
-        </option>
-        <option :value="ItemCategory.Technique">Technique</option>
-        <option :value="ItemCategory.Gym">Gym</option>
-      </select>
+      <div class="my-4">
+        <label>Product category</label>
+        <select v-model="category" class="text-black ml-4">
+          <option :value="ItemCategory.NotSet" disabled selected hidden>
+            Not set
+          </option>
+          <option :value="ItemCategory.Technique">Technique</option>
+          <option :value="ItemCategory.Gym">Gym</option>
+        </select>
+      </div>
 
       <button
         class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"

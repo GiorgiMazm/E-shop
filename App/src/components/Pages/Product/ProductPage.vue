@@ -41,8 +41,8 @@ onBeforeRouteLeave(() => {
           type="text"
         />
       </div>
-      <ProductsList />
       <ProductItemForm />
+      <ProductsList />
     </div>
   </div>
 </template>
