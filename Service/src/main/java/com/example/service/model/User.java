@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
-@Entity(name = "user")
+@Entity(name = "user_account")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class User {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String LastName;
 
     @Column(name = "email", nullable = false, unique = true)
@@ -25,4 +25,7 @@ public class User {
 
     @Column(name = "bag", nullable = false)
     private String bag;
+
+    @Column(name = "admin", nullable = false)
+    private boolean admin;
 }

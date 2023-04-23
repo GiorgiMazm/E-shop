@@ -42,7 +42,6 @@ public class ProductController {
         product.setPrice(newProduct.getPrice());
         product.setDescription(newProduct.getDescription());
 
-        System.out.println(product);
         productRepository.save(product);
     }
 }
