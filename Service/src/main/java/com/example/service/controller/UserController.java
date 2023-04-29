@@ -41,8 +41,6 @@ public class UserController {
         user.setEmail(newUser.getEmail());
         user.setLastName(newUser.getLastName());
         user.setPassword(newUser.getPassword());
-        user.setAdmin(newUser.isAdmin());
-        user.setBag(newUser.getBag());
 
         userRepository.save(user);
     }
@@ -57,5 +55,19 @@ public class UserController {
 
         userRepository.save(user);
     }
-}
 
+    @PostMapping(path = "addUserBag/{userId}")
+    public void addUserBag(@PathVariable(value = "userId") Long userId, @RequestBody Product product) {
+        User user = userRepository.findById(userId).get();
+        user.getBag().add(product);
+        userRepository.save(user);
+    }
+
+    @DeleteMapping(path = "deleteUserBag/{userId}")
+    public void deleteUserBagItem(@PathVariable(value = "userId") Long userId, @RequestBody Product product) {
+        User user = userRepository.findById(userId).get();
+        System.out.println("svsdgvgvsgs" + product);
+        user.getBag().remove(product);
+        userRepository.save(user);
+    }
+}

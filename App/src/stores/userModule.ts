@@ -25,23 +25,39 @@ export default {
       userList.all = await axios
         .get("http://localhost:8080/userList")
         .then((response) => response.data);
-      console.log(userList.all);
     } catch (error) {
       alert(error);
       console.log(error);
     }
   },
-  editUserInfo(
+  async editUserInfo(
     name: string,
-    lastname: string,
+    lastName: string,
     email: string,
     password: string
   ) {
     if (currentUser.user) {
-      currentUser.user.name = name;
-      currentUser.user.lastName = lastname;
-      currentUser.user.email = email;
-      currentUser.user.password = password;
+      const obj = {
+        name: name,
+        lastName: lastName,
+        email: email,
+        password: password,
+      };
+
+      try {
+        await axios.put(
+          "http://localhost:8080/editUser/" + currentUser.user.id,
+          obj
+        );
+        await this.loadAllUser();
+        currentUser.user.name = name;
+        currentUser.user.lastName = lastName;
+        currentUser.user.email = email;
+        currentUser.user.password = password;
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
     }
   },
 
@@ -56,19 +72,28 @@ export default {
     if (user) currentUser.user = user;
   },
 
-  signUp(name: string, lastName: string, email: string, password: string) {
-    const user: User = {
-      email: "giorgi@gmail.com",
-      password: "bfdsq34D",
-      name: "Giorgi",
-      lastName: "Mazm",
-      admin: true,
-      id: 0,
+  async signUp(
+    name: string,
+    lastName: string,
+    email: string,
+    password: string
+  ) {
+    const user = {
+      email: email,
+      password: password,
+      name: name,
+      lastName: lastName,
+      admin: false,
       bag: [],
     };
-    userList.all.push(user);
-    currentUser.user = user;
-    console.log(user);
+
+    try {
+      await axios.post("http://localhost:8080/newUser", user);
+      await this.loadAllUser();
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
   },
 
   signOut() {
@@ -90,21 +115,50 @@ export default {
     );
   }),
 
-  clearBag() {
-    if (currentUser.user) currentUser.user.bag = [];
-  },
-
-  removeItemFromBag(id: number) {
+  async clearBag() {
     if (currentUser.user) {
-      const index = currentUser.user.bag.findIndex(
-        (product) => product.id === id
-      );
-      currentUser.user.bag.splice(index, 1);
+      currentUser.user.bag = [];
+      try {
+        await axios.put(
+          "http://localhost:8080/editUserBag/" + currentUser.user?.id,
+          []
+        );
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
     }
   },
 
-  addItemToBag(item: Item, quantity: number) {
+  async removeItemFromBag(deletingProduct: Item) {
+    if (currentUser.user) {
+      const index = currentUser.user.bag.findIndex(
+        (product) => product.id === deletingProduct.id
+      );
+      currentUser.user.bag.splice(index, 1);
+      try {
+        await axios.delete(
+          "http://localhost:8080/deleteUserBag/" + currentUser.user?.id,
+          { data: deletingProduct }
+        );
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+    }
+  },
+
+  async addItemToBag(item: Item, quantity: number) {
     for (let i = 0; i < quantity; i++) {
+      try {
+        await axios.post(
+          "http://localhost:8080/addUserBag/" + currentUser.user?.id,
+          item
+        );
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
       currentUser.user?.bag.push(item);
     }
   },

@@ -15,14 +15,16 @@ const passwordObject = reactive({
   passwordVisibility: false,
 });
 
-function signUp() {
-  store.userModule.signUp(
+async function signUp() {
+  await store.userModule.signUp(
     name.value,
     lastName.value,
     email.value,
     password.value
   );
-  if (store.userModule.getCurrentUser) router.push("/");
+  await store.userModule.loadAllUser();
+  store.userModule.signIn(email.value, password.value);
+  if (store.userModule.getCurrentUser) await router.push("/");
 }
 </script>
 
