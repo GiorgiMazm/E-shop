@@ -92,7 +92,7 @@ export default {
       console.log(error);
     }
 
-    userModule.getUserList.value.forEach((user) => {
+    userModule.getUserList.value.all.forEach((user) => {
       user.bag = user.bag.filter((item) => item.id !== id);
     });
   },

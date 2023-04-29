@@ -5,7 +5,7 @@ import { CurrencyDollarIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
 const store = useProductStore();
 
-const sum = computed(() => store.userModule.getCurrentUser?.sum);
+const sum = computed(() => store.userModule.getUserBagSum);
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const sum = computed(() => store.userModule.getCurrentUser?.sum);
         <h2 class="text-4xl text-center py-5">
           <button
             class="rounded-xl bg-gray-700 py-3 px-4 mb-3 hover:text-amber-600"
-            @click="store.userModule.getCurrentUser?.clearBag()"
+            @click="store.userModule.clearBag()"
           >
             Clear bag
           </button>

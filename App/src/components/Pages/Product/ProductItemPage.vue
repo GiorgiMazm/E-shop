@@ -11,7 +11,7 @@ const quantity = ref(1);
 
 function addSomeItems() {
   if (store.userModule.getCurrentUser) {
-    store.userModule.getCurrentUser.addItemToBag(item!, quantity.value);
+    store.userModule.addItemToBag(item!, quantity.value);
     alert("item was added to your bag");
   } else alert("You have to log in to add item to your bag");
   quantity.value = 1;

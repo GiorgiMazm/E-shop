@@ -11,7 +11,7 @@ const user = store.userModule.getCurrentUser;
 
 function addItemToBag() {
   if (store.userModule.getCurrentUser) {
-    store.userModule.getCurrentUser.addItemToBag(props.item, 1);
+    store.userModule.addItemToBag(props.item, 1);
     alert("item was added to your bag");
   } else alert("You have to log in to add item to your bag");
 }

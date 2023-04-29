@@ -15,9 +15,7 @@ const store = useProductStore();
   >
     <XMarkIcon
       class="h-6 w-6 cursor-pointer hover:text-white absolute left-2 top-5"
-      @click.prevent="
-        store.userModule.getCurrentUser?.removeItemFromBag(props.item.id)
-      "
+      @click.prevent="store.userModule.removeItemFromBag(props.item.id)"
     />
     <span>{{ item.name }}</span>
     <img class="h-32 mx-3 w-36" :src="props.item.link" :alt="item.name" />
