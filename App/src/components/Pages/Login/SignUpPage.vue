@@ -16,12 +16,12 @@ const passwordObject = reactive({
 });
 
 async function signUp() {
-  await store.userModule.signUp(
-    name.value,
-    lastName.value,
-    email.value,
-    password.value
-  );
+  await store.userModule.signUp({
+    name: name.value,
+    lastName: lastName.value,
+    email: email.value,
+    password: password.value,
+  });
   await store.userModule.loadAllUser();
   store.userModule.signIn(email.value, password.value);
   if (store.userModule.getCurrentUser) await router.push("/");

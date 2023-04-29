@@ -7,17 +7,7 @@ const currentUser = reactive<{ user: User | null }>({
   user: null,
 });
 const userList = reactive<{ all: User[] }>({
-  all: [
-    {
-      email: "giorgi@gmail.com",
-      password: "bfdsq34D",
-      name: "Giorgi",
-      lastName: "Mazm",
-      admin: true,
-      id: 0,
-      bag: [],
-    },
-  ],
+  all: [],
 });
 export default {
   async loadAllUser() {
@@ -30,30 +20,22 @@ export default {
       console.log(error);
     }
   },
-  async editUserInfo(
-    name: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) {
+  async editUserInfo(newUser: {
+    name: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }) {
     if (currentUser.user) {
-      const obj = {
-        name: name,
-        lastName: lastName,
-        email: email,
-        password: password,
-      };
-
       try {
         await axios.put(
           "http://localhost:8080/editUser/" + currentUser.user.id,
-          obj
+          newUser
         );
-        await this.loadAllUser();
-        currentUser.user.name = name;
-        currentUser.user.lastName = lastName;
-        currentUser.user.email = email;
-        currentUser.user.password = password;
+        currentUser.user.name = newUser.name;
+        currentUser.user.lastName = newUser.lastName;
+        currentUser.user.email = newUser.email;
+        currentUser.user.password = newUser.password;
       } catch (error) {
         alert(error);
         console.log(error);
@@ -72,21 +54,12 @@ export default {
     if (user) currentUser.user = user;
   },
 
-  async signUp(
-    name: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) {
-    const user = {
-      email: email,
-      password: password,
-      name: name,
-      lastName: lastName,
-      admin: false,
-      bag: [],
-    };
-
+  async signUp(user: {
+    name: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }) {
     try {
       await axios.post("http://localhost:8080/newUser", user);
       await this.loadAllUser();

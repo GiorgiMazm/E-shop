@@ -79,7 +79,12 @@ if (user) {
           class="rounded-xl bg-gray-100 py-3 px-10 mr-3 my-4 hover:text-amber-500"
           :to="'/'"
           @click="
-            store.userModule.editUserInfo(name, lastName, email, password)
+            store.userModule.editUserInfo({
+              name: name,
+              lastName: lastName,
+              email: email,
+              password: password,
+            })
           "
         >
           Save</router-link
