@@ -2,7 +2,10 @@ package com.example.service.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity(name = "user_account")
@@ -36,4 +39,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> bag;
+
+
+    @OneToMany(mappedBy = "user")
+    private Set<Review> reviews = new HashSet<>();
 }

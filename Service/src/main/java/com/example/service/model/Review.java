@@ -11,12 +11,6 @@ public class Review {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "user_id", nullable = false, updatable = false)
-    private Long userId;
-
-    @Column(name = "product_id", nullable = false, updatable = false)
-    private Long productId;
-
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -25,5 +19,13 @@ public class Review {
 
     @Column(name = "rate", nullable = false)
     private int rate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
 }

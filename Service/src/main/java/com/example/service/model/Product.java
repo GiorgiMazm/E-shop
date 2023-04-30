@@ -5,7 +5,9 @@ import lombok.Data;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity(name = "product")
@@ -40,5 +42,8 @@ public class Product {
 
     public Product() {
     }
+
+    @OneToMany(mappedBy = "product")
+    private Set<Review> reviews = new HashSet<>();
 
 }
