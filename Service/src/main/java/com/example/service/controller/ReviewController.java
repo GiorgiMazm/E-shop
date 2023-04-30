@@ -47,16 +47,5 @@ public class ReviewController {
     public void deleteReview(@PathVariable("reviewId") Long reviewId) {
         reviewRepository.deleteById(reviewId);
     }
-
-    @PutMapping(path = "editReview/{reviewId}")
-    public void updateReview(@PathVariable(value = "reviewId") Long reviewId, @RequestBody Review newReview) {
-        Review review = reviewRepository.findById(reviewId).get();
-
-        review.setTitle(newReview.getTitle());
-        review.setRate(newReview.getRate());
-        review.setDescription(newReview.getDescription());
-
-        reviewRepository.save(review);
-    }
 }
 

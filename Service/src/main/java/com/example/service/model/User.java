@@ -28,7 +28,6 @@ public class User {
     private String password;
 
 
-
     @Column(name = "admin", nullable = false)
     private boolean admin;
 
