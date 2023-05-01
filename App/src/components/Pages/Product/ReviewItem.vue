@@ -7,7 +7,7 @@ const store = useProductStore();
 const props = defineProps<{
   review: Review;
 }>();
-const user = useProductStore().userModule.getUserById(props.review.authorId);
+const user = useProductStore().userModule.getUserById(props.review.user.id);
 </script>
 
 <template>

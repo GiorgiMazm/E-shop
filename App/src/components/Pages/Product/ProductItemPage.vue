@@ -62,7 +62,7 @@ function addSomeItems() {
           >
             Back</router-link
           >
-          <ReviewSection :item-id="item.id" />
+          <ReviewSection :item="item" />
         </div>
       </div>
     </div>

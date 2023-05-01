@@ -8,8 +8,6 @@ import { onBeforeRouteLeave } from "vue-router";
 
 const filter = ref<ItemCategory>(ItemCategory.NotSet);
 const store = useProductStore();
-store.productModule.loadAllProduct();
-
 const keyWord = ref("");
 
 onBeforeRouteLeave(() => {

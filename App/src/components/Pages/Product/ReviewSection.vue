@@ -2,15 +2,18 @@
 import ReviewItem from "./ReviewItem.vue";
 import { ref } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
+import Review from "../../../types/Review";
+import Item from "../../../types/Item";
 const store = useProductStore();
 const title = ref("");
 const description = ref("");
 const rate = ref(10);
 const props = defineProps<{
-  itemId: number;
+  item: Item;
 }>();
 
 function clearInputs() {
+  title.value = "";
   description.value = "";
   rate.value = 10;
 }
@@ -22,20 +25,20 @@ function clearInputs() {
     <h3 class="text-center text-2xl">
       The average rating of this product is
       <mark class="font-bold bg-gray-500">{{
-        store.reviewModule.getAverageRateByProductId(props.itemId)
+        store.reviewModule.getAverageRateByProductId(props.item.id)
       }}</mark>
     </h3>
     <form
       class="mt-4"
       v-if="store.userModule.getCurrentUser"
       @submit.prevent="
-        store.reviewModule.addUserReview(
-          props.itemId,
-          store.userModule.getCurrentUser?.id!,
-          title,
-          description,
-          rate
-        );
+        store.reviewModule.addUserReview({
+          product: props.item,
+          user: store.userModule.getCurrentUser,
+          title: title,
+          description: description,
+          rate: rate,
+        } as Review);
         clearInputs();
       "
     >
@@ -79,7 +82,7 @@ function clearInputs() {
     <div>
       <ReviewItem
         v-for="review in store.reviewModule.getUserReviewByProductId(
-          props.itemId
+          props.item.id
         )"
         :review="review"
         :key="review.id"

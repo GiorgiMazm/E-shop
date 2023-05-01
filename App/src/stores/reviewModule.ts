@@ -1,26 +1,29 @@
-import { computed, reactive, ref } from "vue";
+import { computed, reactive } from "vue";
 import Review from "../types/Review";
 import userModule from "./userModule";
 import UserModule from "./userModule";
+import axios from "axios";
 
-const reviewIdCounter = ref(1);
-const userReviewList = reactive<Review[]>([
-  {
-    authorId: 1,
-    productId: 2,
-    title: "I am speechless",
-    description: "the best thing ever",
-    rate: 4,
-    id: 1,
-  },
-]);
+const userReviewList = reactive<{ array: Review[] }>({ array: [] });
 export default {
+  async loadAllReview() {
+    try {
+      userReviewList.array = await axios
+        .get("http://localhost:8080/reviewList")
+        .then((response) => response.data);
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
+  },
   getUserReviewList: computed(() => {
     return userReviewList;
   }),
 
   getUserReviewByProductId(id: number) {
-    return userReviewList.filter((review: Review) => review.productId === id);
+    return userReviewList.array.filter(
+      (review: Review) => review.product.id === id
+    );
   },
 
   getAverageRateByProductId(productId: number): number | "no rate yet" {
@@ -34,28 +37,26 @@ export default {
     return parseFloat((sum / rateArray.length).toFixed(1));
   },
 
-  addUserReview(
-    productId: number,
-    authorId: number,
-    title: string,
-    description: string,
-    rate: number
-  ): void {
+  async addUserReview(review: Review) {
     if (userModule.getCurrentUser) {
-      userReviewList.push({
-        authorId: authorId,
-        productId: productId,
-        title: title,
-        rate: rate,
-        description: description,
-        id: ++reviewIdCounter.value,
-      });
+      try {
+        await axios.post("http://localhost:8080/newReview", review);
+      } catch (error) {
+        alert(error);
+        console.log(error);
+      }
+      await this.loadAllReview();
     }
   },
 
-  removeUserReview(id: number) {
+  async removeUserReview(id: number) {
     if (!UserModule.getCurrentUser.value?.admin) return;
-    const index = userReviewList.findIndex((review) => review.id === id);
-    if (index !== -1) userReviewList.splice(index, 1);
+    try {
+      await axios.delete("http://localhost:8080/deleteReview/" + id);
+      await this.loadAllReview();
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
   },
 };

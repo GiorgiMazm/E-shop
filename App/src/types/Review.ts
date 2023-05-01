@@ -1,6 +1,9 @@
+import User from "./User";
+import Item from "./Item";
+
 export default interface Review {
-  authorId: number;
-  productId: number;
+  user: User;
+  product: Item;
   title: string;
   description: string;
   rate: number;
