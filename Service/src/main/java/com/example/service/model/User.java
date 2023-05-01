@@ -40,6 +40,6 @@ public class User {
     private List<Product> bag;
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",  cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Review> reviews = new HashSet<>();
 }
