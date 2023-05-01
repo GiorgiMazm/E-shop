@@ -7,10 +7,12 @@ const props = defineProps<{
 }>();
 
 const store = useProductStore();
+const currentUser = store.userModule.getCurrentUser === props.user;
 </script>
 
 <template>
   <div class="my-3 w-1/4">
+    <p class="text-white" v-if="currentUser">This is your account</p>
     <p>First name: {{ props.user.name }}</p>
     <p>Last Name: {{ props.user.lastName }}</p>
     <p>Email address: {{ props.user.email }}</p>
@@ -25,7 +27,7 @@ const store = useProductStore();
     </button>
 
     <button
-      v-if="props.user.admin"
+      v-if="props.user.admin && !currentUser"
       @click="store.userModule.editUserPrivilege(props.user.id)"
       class="rounded-xl bg-gray-300 py-2 px-3 mt-2 hover:text-amber-600"
     >
@@ -33,7 +35,7 @@ const store = useProductStore();
     </button>
     <button
       @click="store.userModule.deleteUser(props.user.id)"
-      class="rounded-xl bg-gray-700 py-2 px-3 ml-3 hover:text-amber-600"
+      class="rounded-xl bg-gray-700 py-2 px-3 ml-3 mt-2 hover:text-amber-600"
     >
       Delete user
     </button>

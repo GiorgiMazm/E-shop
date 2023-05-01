@@ -6,6 +6,7 @@ import {
   LockClosedIcon,
   LockOpenIcon,
   UserCircleIcon,
+  UserGroupIcon,
 } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../stores/ProductStore";
 import { computed } from "vue";
@@ -16,7 +17,7 @@ const user = computed(() => store.userModule.getCurrentUser);
 <template>
   <header class="bg-gray-700 py-5">
     <div class="flex justify-between items-center container mx-auto">
-      <ul class="flex justify-between w-1/4 p-3 text-gray-300">
+      <ul class="flex justify-between w-1/3 p-3 text-gray-300">
         <li>
           <router-link class="hover:text-amber-600" to="/"
             ><HomeIcon class="h-6 w-6 inline mr-2" /> Home</router-link
@@ -40,6 +41,12 @@ const user = computed(() => store.userModule.getCurrentUser);
           <router-link class="hover:text-amber-600" to="/">
             <LockOpenIcon class="h-6 w-6 inline mr-2" />
             Log out</router-link
+          >
+        </li>
+        <li v-if="user?.admin">
+          <router-link class="hover:text-amber-600" to="/userList">
+            <UserGroupIcon class="h-6 w-6 inline mr-2" />
+            Users</router-link
           >
         </li>
       </ul>
