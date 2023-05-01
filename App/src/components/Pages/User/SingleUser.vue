@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import User from "../../../types/User";
 import { useProductStore } from "../../../stores/ProductStore";
+import { useRouter } from "vue-router";
 
 const props = defineProps<{
   user: User;
 }>();
 
+const router = useRouter();
 const store = useProductStore();
 const currentUser = store.userModule.getCurrentUser === props.user;
+
+function deleteUser() {
+  if (currentUser) {
+    store.userModule.signOut();
+    router.push("/");
+  }
+  store.userModule.deleteUser(props.user.id);
+}
 </script>
 
 <template>
@@ -34,7 +44,7 @@ const currentUser = store.userModule.getCurrentUser === props.user;
       Exclude from admins
     </button>
     <button
-      @click="store.userModule.deleteUser(props.user.id)"
+      @click="deleteUser"
       class="rounded-xl bg-gray-700 py-2 px-3 ml-3 mt-2 hover:text-amber-600"
     >
       Delete user
