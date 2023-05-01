@@ -20,6 +20,27 @@ export default {
       console.log(error);
     }
   },
+
+  async deleteUser(id: number) {
+    try {
+      await axios.delete("http://localhost:8080/deleteUser/" + id);
+      await this.loadAllUser();
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
+  },
+
+  async editUserPrivilege(id: number) {
+    try {
+      await axios.put("http://localhost:8080/editPrivilege/" + id);
+      await this.loadAllUser();
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
+  },
+
   async editUserInfo(newUser: {
     name: string;
     lastName: string;

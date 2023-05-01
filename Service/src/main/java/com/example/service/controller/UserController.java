@@ -45,6 +45,13 @@ public class UserController {
         userRepository.save(user);
     }
 
+    @PutMapping(path = "editPrivilege/{userId}")
+    public void updateUserPrivilege(@PathVariable(value = "userId") Long userId) {
+        User user = userRepository.findById(userId).get();
+
+        user.setAdmin(!user.isAdmin());
+        userRepository.save(user);
+    }
 
     @PutMapping(path = "editUserBag/{userId}")
     public void updateUserBag(@PathVariable(value = "userId") Long userId, @RequestBody List<Product> newProducts) {
