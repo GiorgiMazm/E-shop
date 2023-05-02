@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import Review from "../../../types/Review";
-import { useProductStore } from "../../../stores/ProductStore";
+import Review from "../../../../types/Review";
+import { useProductStore } from "../../../../stores/ProductStore";
 import { XMarkIcon } from "@heroicons/vue/24/solid";
 
 const store = useProductStore();

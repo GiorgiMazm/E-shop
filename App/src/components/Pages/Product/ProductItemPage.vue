@@ -2,7 +2,7 @@
 import { useRoute } from "vue-router";
 import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/solid";
-import ReviewSection from "./ReviewSection.vue";
+import ReviewSection from "./Review/ReviewSection.vue";
 import { ref } from "vue";
 const store = useProductStore();
 const route = useRoute();

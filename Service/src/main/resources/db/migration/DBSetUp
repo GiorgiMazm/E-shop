@@ -49,9 +49,7 @@ values ('Macbook', 'the!', 'Technique',
         'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202206_GEO_EMEA_LANG_DE?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1664497359389',
         2500);
 
-insert into product(name, description, category, link, price)
-values ('Vika', 'the!', 'Gym',
-        'https://i.etsystatic.com/25931038/r/il/cd57b6/3218252476/il_fullxfull.3218252476_jkcq.jpg', 666);
+
 
 insert into product(name, description, category, link, price)
 values ('Batman Protein Shaker', 'the!', 'Gym',

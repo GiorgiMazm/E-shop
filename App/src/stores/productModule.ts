@@ -5,16 +5,7 @@ import { ItemCategory } from "../types/ItemCategory";
 import userModule from "./userModule";
 
 const productsList = reactive<{ array: Item[] }>({
-  array: [
-    {
-      name: "",
-      price: 0,
-      link: "",
-      description: "",
-      category: ItemCategory.NotSet,
-      id: 0,
-    },
-  ],
+  array: [],
 });
 
 export default {
