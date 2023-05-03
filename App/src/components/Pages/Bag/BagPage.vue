@@ -5,7 +5,7 @@ import { CurrencyDollarIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
 const store = useProductStore();
 
-const sum = computed(() => store.userModule.getUserBagSum);
+const userBagSum = computed(() => store.userModule.getUserBagSum);
 </script>
 
 <template>
@@ -19,7 +19,7 @@ const sum = computed(() => store.userModule.getUserBagSum);
           >
             Clear bag
           </button>
-          Total is: {{ sum }}
+          Total is: {{ userBagSum }}
           <CurrencyDollarIcon class="h-12 w-12 text-black inline" />
           <button
             class="rounded-xl bg-gray-700 py-3 px-4 ml-3 hover:text-amber-600"

@@ -5,10 +5,10 @@ import reviewModule from "./reviewModule";
 
 export const useProductStore = defineStore("Products", () => {
   function passwordVisibilityToggle(passwordObject: {
-    passwordVisibility: boolean;
+    isPasswordVisible: boolean;
     passwordType: string;
   }) {
-    passwordObject.passwordVisibility = !passwordObject.passwordVisibility;
+    passwordObject.isPasswordVisible = !passwordObject.isPasswordVisible;
     if (passwordObject.passwordType === "password")
       passwordObject.passwordType = "text";
     else passwordObject.passwordType = "password";

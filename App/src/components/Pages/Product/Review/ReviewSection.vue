@@ -32,7 +32,7 @@ function clearInputs() {
       class="mt-4"
       v-if="store.userModule.getCurrentUser"
       @submit.prevent="
-        store.reviewModule.addUserReview({
+        store.reviewModule.addReview({
           product: props.item,
           user: store.userModule.getCurrentUser,
           title: title,
@@ -81,9 +81,7 @@ function clearInputs() {
 
     <div>
       <ReviewItem
-        v-for="review in store.reviewModule.getUserReviewByProductId(
-          props.item.id
-        )"
+        v-for="review in store.reviewModule.getReviewByProductId(props.item.id)"
         :review="review"
         :key="review.id"
       />

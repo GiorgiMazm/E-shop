@@ -11,7 +11,7 @@ const email = ref("");
 const password = ref("");
 const passwordObject = reactive({
   passwordType: "password",
-  passwordVisibility: false,
+  isPasswordVisible: false,
 });
 
 if (user) {
@@ -19,6 +19,15 @@ if (user) {
   lastName.value = user.lastName;
   email.value = user.email;
   password.value = user.password;
+}
+
+function editUserInfo() {
+  store.userModule.editUserInfo({
+    name: name.value,
+    lastName: lastName.value,
+    email: email.value,
+    password: password.value,
+  });
 }
 </script>
 
@@ -65,12 +74,12 @@ if (user) {
           />
 
           <EyeIcon
-            v-if="!passwordObject.passwordVisibility"
+            v-if="!passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"
             class="w-5 h-5 cursor-pointer absolute right-5 top-9"
           />
           <EyeSlashIcon
-            v-if="passwordObject.passwordVisibility"
+            v-if="passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"
             class="w-5 h-5 cursor-pointer absolute right-5 top-9"
           />
@@ -78,14 +87,7 @@ if (user) {
         <router-link
           class="rounded-xl bg-gray-100 py-3 px-10 mr-3 my-4 hover:text-amber-500"
           :to="'/'"
-          @click="
-            store.userModule.editUserInfo({
-              name: name,
-              lastName: lastName,
-              email: email,
-              password: password,
-            })
-          "
+          @click="editUserInfo"
         >
           Save</router-link
         >

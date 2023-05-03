@@ -6,13 +6,26 @@ import { ItemCategory } from "../../../types/ItemCategory";
 
 const store = useProductStore();
 const route = useRoute();
-const item = store.productModule.getProductById(Number(route.params.id))!;
+const item = store.productModule.getProductById(Number(route.params.id));
 
-const name = ref(item.name);
-const price = ref(item.price);
-const description = ref(item.description);
-const link = ref(item.link);
-const category = ref(item.category);
+const name = ref(item?.name ?? "");
+const price = ref(item?.price ?? 0);
+const description = ref(item?.description ?? "");
+const link = ref(item?.link ?? "");
+const category = ref(item?.category ?? ItemCategory.NotSet);
+
+function editProductItem() {
+  if (item) {
+    store.productModule.editProductItem(
+      item.id,
+      name.value,
+      price.value,
+      description.value,
+      link.value,
+      category.value
+    );
+  }
+}
 </script>
 
 <template>
@@ -72,16 +85,7 @@ const category = ref(item.category);
         </div>
 
         <router-link
-          @click="
-            store.productModule.editProductItem(
-              item.id,
-              name,
-              price,
-              description,
-              link,
-              category
-            )
-          "
+          @click="editProductItem"
           class="rounded-xl bg-gray-700 py-3 px-10 mr-3 my-4 hover:text-amber-500"
           :to="'/products/'"
         >

@@ -1,14 +1,14 @@
-import { computed, reactive } from "vue";
+import { reactive } from "vue";
 import Review from "../types/Review";
 import userModule from "./userModule";
 import UserModule from "./userModule";
 import axios from "axios";
 
-const userReviewList = reactive<{ array: Review[] }>({ array: [] });
+const reviewList = reactive<{ array: Review[] }>({ array: [] });
 export default {
   async loadAllReview() {
     try {
-      userReviewList.array = await axios
+      reviewList.array = await axios
         .get("http://localhost:8080/reviewList")
         .then((response) => response.data);
     } catch (error) {
@@ -16,18 +16,15 @@ export default {
       console.log(error);
     }
   },
-  getUserReviewList: computed(() => {
-    return userReviewList;
-  }),
 
-  getUserReviewByProductId(id: number) {
-    return userReviewList.array.filter(
+  getReviewByProductId(id: number) {
+    return reviewList.array.filter(
       (review: Review) => review.product.id === id
     );
   },
 
   getAverageRateByProductId(productId: number): number | "no rate yet" {
-    const rateArray = this.getUserReviewByProductId(productId);
+    const rateArray = this.getReviewByProductId(productId);
     const sum = rateArray.reduce((accumulator: number, rate: Review) => {
       return accumulator + rate.rate;
     }, 0);
@@ -37,7 +34,7 @@ export default {
     return parseFloat((sum / rateArray.length).toFixed(1));
   },
 
-  async addUserReview(review: Review) {
+  async addReview(review: Review) {
     if (userModule.getCurrentUser) {
       try {
         await axios.post("http://localhost:8080/newReview", review);
@@ -49,7 +46,7 @@ export default {
     }
   },
 
-  async removeUserReview(id: number) {
+  async removeReview(id: number) {
     if (!UserModule.getCurrentUser.value?.admin) return;
     try {
       await axios.delete("http://localhost:8080/deleteReview/" + id);

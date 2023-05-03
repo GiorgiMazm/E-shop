@@ -6,17 +6,17 @@ import { ItemCategory } from "../../../types/ItemCategory";
 const store = useProductStore();
 const name = ref("");
 const price = ref(0);
-const imageLink = ref("");
+const link = ref("");
 const description = ref("");
 const category = ref<ItemCategory>(ItemCategory.NotSet);
-const newFormVisibility = ref(false);
+const isFormVisible = ref(false);
 const user = store.userModule.getCurrentUser;
 
 function toggleNewItemForm(): void {
-  newFormVisibility.value = !newFormVisibility.value;
+  isFormVisible.value = !isFormVisible.value;
   name.value = "";
   price.value = 0;
-  imageLink.value = "";
+  link.value = "";
   description.value = "";
   description.value = "";
   category.value = ItemCategory.NotSet;
@@ -25,7 +25,7 @@ function toggleNewItemForm(): void {
 
 <template>
   <div class="container mx-auto" v-if="user?.admin">
-    <form class="my-5" v-if="newFormVisibility">
+    <form class="my-5" v-if="isFormVisible">
       <div class="my-4">
         <label>Product name</label>
         <input
@@ -52,7 +52,7 @@ function toggleNewItemForm(): void {
           class="rounded mx-3 text-black px-3"
           placeholder="Image of the product"
           type="text"
-          v-model="imageLink"
+          v-model="link"
         />
       </div>
 
@@ -80,13 +80,13 @@ function toggleNewItemForm(): void {
       <button
         class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
         @click.prevent="
-          store.productModule.addProductItem(
-            name,
-            price,
-            imageLink,
-            description,
-            category
-          );
+          store.productModule.addProductItem({
+            name: name,
+            price: price,
+            link: link,
+            description: description,
+            category: category,
+          });
           toggleNewItemForm();
         "
         type="submit"
@@ -95,7 +95,7 @@ function toggleNewItemForm(): void {
       </button>
     </form>
     <button
-      v-if="!newFormVisibility"
+      v-if="!isFormVisible"
       @click="toggleNewItemForm"
       class="hover:text-black"
     >
@@ -103,7 +103,7 @@ function toggleNewItemForm(): void {
     </button>
     <button
       class="mx-3 rounded-l bg-gray-700 py-3 px-4 hover:text-amber-500"
-      v-if="newFormVisibility"
+      v-if="isFormVisible"
       @click="toggleNewItemForm"
     >
       Cancel

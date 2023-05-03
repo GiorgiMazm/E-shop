@@ -2,11 +2,11 @@
 import { XMarkIcon, PencilIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
 import Item from "../../../types/Item";
+
 const props = defineProps<{
   item: Item;
 }>();
 const store = useProductStore();
-
 const user = store.userModule.getCurrentUser;
 
 function addItemToBag() {

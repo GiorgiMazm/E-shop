@@ -11,7 +11,7 @@ const router = useRouter();
 
 const passwordObject = reactive({
   passwordType: "password",
-  passwordVisibility: false,
+  isPasswordVisible: false,
 });
 
 function signIn() {
@@ -50,12 +50,12 @@ function signIn() {
             :type="passwordObject.passwordType"
           />
           <EyeIcon
-            v-if="!passwordObject.passwordVisibility"
+            v-if="!passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"
             class="w-5 h-5 cursor-pointer absolute right-5 top-11"
           />
           <EyeSlashIcon
-            v-if="passwordObject.passwordVisibility"
+            v-if="passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"
             class="w-5 h-5 cursor-pointer absolute right-5 top-11"
           />

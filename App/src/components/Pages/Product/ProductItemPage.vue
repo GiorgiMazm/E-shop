@@ -4,14 +4,15 @@ import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/solid";
 import ReviewSection from "./Review/ReviewSection.vue";
 import { ref } from "vue";
+
 const store = useProductStore();
 const route = useRoute();
 const item = store.productModule.getProductById(Number(route.params.id));
 const quantity = ref(1);
 
-function addSomeItems() {
-  if (store.userModule.getCurrentUser) {
-    store.userModule.addItemToBag(item!, quantity.value);
+function addSeveralItems() {
+  if (store.userModule.getCurrentUser && item) {
+    store.userModule.addItemToBag(item, quantity.value);
     alert("item was added to your bag");
   } else alert("You have to log in to add item to your bag");
   quantity.value = 1;
@@ -50,7 +51,7 @@ function addSomeItems() {
             Buy now
           </button>
           <button
-            @click="addSomeItems"
+            @click="addSeveralItems"
             class="rounded-xl bg-gray-700 py-3 px-4 m-5 hover:text-amber-500"
           >
             Add to basket

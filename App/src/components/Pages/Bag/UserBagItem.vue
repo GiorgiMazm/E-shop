@@ -2,10 +2,10 @@
 import { XMarkIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
 import Item from "../../../types/Item";
+
 const props = defineProps<{
   item: Item;
 }>();
-
 const store = useProductStore();
 </script>
 

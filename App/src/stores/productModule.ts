@@ -48,24 +48,17 @@ export default {
     }
   },
 
-  async addProductItem(
-    name: string,
-    price: number,
-    imageLink: string,
-    description: string,
-    category: ItemCategory
-  ): Promise<void> {
+  async addProductItem(item: {
+    name: string;
+    price: number;
+    link: string;
+    description: string;
+    category: ItemCategory;
+  }): Promise<void> {
     if (!userModule.getCurrentUser.value?.admin) return;
-    const obj = {
-      name: name,
-      price: price,
-      link: imageLink,
-      description: description,
-      category: category,
-    };
 
     try {
-      await axios.post("http://localhost:8080/newProduct", obj);
+      await axios.post("http://localhost:8080/newProduct", item);
       await this.loadAllProduct();
     } catch (error) {
       alert(error);

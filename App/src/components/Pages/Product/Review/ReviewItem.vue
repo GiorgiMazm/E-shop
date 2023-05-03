@@ -14,7 +14,7 @@ const user = useProductStore().userModule.getUserById(props.review.user.id);
   <article class="border-2 my-3 p-3 text-center">
     <XMarkIcon
       class="h-6 w-6 cursor-pointer hover:text-black"
-      @click="store.reviewModule.removeUserReview(props.review.id)"
+      @click="store.reviewModule.removeReview(props.review.id)"
       v-if="store.userModule.getCurrentUser?.admin"
     />
     <h2 class="font-bold">{{ props.review.title }}</h2>

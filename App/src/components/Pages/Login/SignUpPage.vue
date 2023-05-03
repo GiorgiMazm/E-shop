@@ -12,7 +12,7 @@ const password = ref("");
 
 const passwordObject = reactive({
   passwordType: "password",
-  passwordVisibility: false,
+  isPasswordVisible: false,
 });
 
 async function signUp() {
@@ -77,12 +77,12 @@ async function signUp() {
             :type="passwordObject.passwordType"
           />
           <EyeIcon
-            v-if="!passwordObject.passwordVisibility"
+            v-if="!passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"
             class="w-5 h-5 cursor-pointer absolute right-5 top-11"
           />
           <EyeSlashIcon
-            v-if="passwordObject.passwordVisibility"
+            v-if="passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"
             class="w-5 h-5 cursor-pointer absolute right-5 top-11"
           />

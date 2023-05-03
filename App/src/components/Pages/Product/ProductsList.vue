@@ -4,7 +4,6 @@ import { useProductStore } from "../../../stores/ProductStore";
 import { computed } from "vue";
 
 const store = useProductStore();
-
 const productsList = computed(() => store.productModule.getProductList);
 </script>
 
