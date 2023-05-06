@@ -15,7 +15,7 @@ const formData = reactive({
 });
 const rules = {
   email: { required, email },
-  password: { required, minLength: minLength(8) },
+  password: { required, minLength: minLength(6) },
 };
 const validation = useVuelidate(rules, formData);
 const passwordObject = reactive({

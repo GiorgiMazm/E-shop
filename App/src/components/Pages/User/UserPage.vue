@@ -1,32 +1,47 @@
 <script lang="ts" setup>
 import { useProductStore } from "../../../stores/ProductStore";
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/20/solid";
+import { minLength, required, email } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 const store = useProductStore();
 const user = store.userModule.getCurrentUser;
-const name = ref("");
-const lastName = ref("");
-const email = ref("");
-const password = ref("");
+
+const formData = reactive({
+  name: "",
+  lastName: "",
+  email: "",
+  password: "",
+});
+if (user) {
+  formData.name = user.name;
+  formData.lastName = user.lastName;
+  formData.email = user.email;
+  formData.password = user.password;
+}
+
+const rules = {
+  name: { required },
+  lastName: { required },
+  email: { required, email },
+  password: { required, minLength: minLength(6) },
+};
+
+const validation = useVuelidate(rules, formData);
+
 const passwordObject = reactive({
   passwordType: "password",
   isPasswordVisible: false,
 });
 
-if (user) {
-  name.value = user.name;
-  lastName.value = user.lastName;
-  email.value = user.email;
-  password.value = user.password;
-}
-
 function editUserInfo() {
+  if (validation.value.$invalid) return;
   store.userModule.editUserInfo({
-    name: name.value,
-    lastName: lastName.value,
-    email: email.value,
-    password: password.value,
+    name: formData.name,
+    lastName: formData.lastName,
+    email: formData.email,
+    password: formData.password,
   });
 }
 </script>
@@ -43,8 +58,11 @@ function editUserInfo() {
             class="rounded text-black px-3 my-2 border-2 border-amber-500"
             placeholder="Name of the product"
             type="text"
-            v-model="name"
+            v-model="formData.name"
           />
+          <span class="text-red-600 pb-3" v-if="validation.name.$invalid"
+            >Name is required</span
+          >
         </div>
         <div class="flex flex-col">
           <label>Last name</label>
@@ -52,8 +70,11 @@ function editUserInfo() {
             class="rounded text-black px-3 my-2 border-2 border-amber-500"
             placeholder="Name of the product"
             type="text"
-            v-model="lastName"
+            v-model="formData.lastName"
           />
+          <span class="text-red-600 pb-3" v-if="validation.lastName.$invalid"
+            >Last name is required</span
+          >
         </div>
         <div class="flex flex-col">
           <label>Email address</label>
@@ -61,8 +82,11 @@ function editUserInfo() {
             class="rounded text-black px-3 my-2 border-2 border-amber-500"
             placeholder="Name of the product"
             type="text"
-            v-model="email"
+            v-model="formData.email"
           />
+          <span class="text-red-600 pb-3" v-if="validation.email.$invalid"
+            >Email is not valid</span
+          >
         </div>
         <div class="flex flex-col relative">
           <label>Password</label>
@@ -70,8 +94,11 @@ function editUserInfo() {
             class="rounded text-black px-3 mt-2 mb-6 border-2 border-amber-500"
             placeholder="Name of the product"
             :type="passwordObject.passwordType"
-            v-model="password"
+            v-model="formData.password"
           />
+          <span class="text-red-600 pb-3" v-if="validation.password.$invalid"
+            >Password must be at least 8 char</span
+          >
 
           <EyeIcon
             v-if="!passwordObject.isPasswordVisible"

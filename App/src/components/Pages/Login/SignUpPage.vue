@@ -18,7 +18,7 @@ const rules = {
   name: { required },
   lastName: { required },
   email: { required, email },
-  password: { required, minLength: minLength(8) },
+  password: { required, minLength: minLength(6) },
 };
 
 const validation = useVuelidate(rules, formData);
