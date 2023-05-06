@@ -1,14 +1,27 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/20/solid";
 import { useProductStore } from "../../../stores/ProductStore";
 import router from "../../../router/router";
+import { useVuelidate } from "@vuelidate/core";
+import { required, email, minLength } from "@vuelidate/validators";
 
 const store = useProductStore();
-const name = ref("");
-const lastName = ref("");
-const email = ref("");
-const password = ref("");
+const formData = reactive({
+  name: "",
+  lastName: "",
+  email: "",
+  password: "",
+});
+
+const rules = {
+  name: { required },
+  lastName: { required },
+  email: { required, email },
+  password: { required, minLength: minLength(8) },
+};
+
+const validation = useVuelidate(rules, formData);
 
 const passwordObject = reactive({
   passwordType: "password",
@@ -16,14 +29,16 @@ const passwordObject = reactive({
 });
 
 async function signUp() {
+  if (validation.value.$invalid) return;
+
   await store.userModule.signUp({
-    name: name.value,
-    lastName: lastName.value,
-    email: email.value,
-    password: password.value,
+    name: formData.name,
+    lastName: formData.lastName,
+    email: formData.email,
+    password: formData.password,
   });
   await store.userModule.loadAllUser();
-  store.userModule.signIn(email.value, password.value);
+  store.userModule.signIn(formData.email, formData.password);
   if (store.userModule.getCurrentUser) await router.push("/");
 }
 </script>
@@ -45,18 +60,24 @@ async function signUp() {
           <input
             class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600 block"
             placeholder="Max"
-            v-model="name"
+            v-model="formData.name"
             type="text"
           />
+          <span class="text-red-600 pb-3" v-if="validation.name.$invalid"
+            >Name is required</span
+          >
         </div>
         <div class="flex flex-col">
           <label>Last name</label>
           <input
             class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600 block"
             placeholder="Smith"
-            v-model="lastName"
+            v-model="formData.lastName"
             type="text"
           />
+          <span class="text-red-600 pb-3" v-if="validation.lastName.$invalid"
+            >Last name is required</span
+          >
         </div>
         <div class="flex flex-col">
           <label>Email address</label>
@@ -64,8 +85,11 @@ async function signUp() {
             class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
             placeholder="max.smith@gmail.com"
             type="email"
-            v-model="email"
+            v-model="formData.email"
           />
+          <span class="text-red-600 pb-3" v-if="validation.email.$invalid"
+            >Email is not valid</span
+          >
         </div>
 
         <div class="flex flex-col relative">
@@ -73,9 +97,12 @@ async function signUp() {
           <input
             class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600 block"
             placeholder="superStr0ngPa$$w0rd"
-            v-model="password"
+            v-model="formData.password"
             :type="passwordObject.passwordType"
           />
+          <span class="text-red-600 pb-3" v-if="validation.password.$invalid"
+            >Password must be at least 8 char</span
+          >
           <EyeIcon
             v-if="!passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"

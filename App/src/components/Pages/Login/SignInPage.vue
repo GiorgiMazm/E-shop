@@ -1,21 +1,32 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { reactive } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
 import { useRouter } from "vue-router";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/20/solid";
+import { email, minLength, required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
-const email = ref("");
-const password = ref("");
 const store = useProductStore();
 const router = useRouter();
 
+const formData = reactive({
+  email: "",
+  password: "",
+});
+const rules = {
+  email: { required, email },
+  password: { required, minLength: minLength(8) },
+};
+const validation = useVuelidate(rules, formData);
 const passwordObject = reactive({
   passwordType: "password",
   isPasswordVisible: false,
 });
 
 function signIn() {
-  store.userModule.signIn(email.value, password.value);
+  if (validation.value.$invalid) return;
+
+  store.userModule.signIn(formData.email, formData.password);
   if (store.userModule.getCurrentUser) router.push("/");
 }
 </script>
@@ -37,8 +48,11 @@ function signIn() {
             class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600"
             placeholder="someEmail@gmail.com"
             type="email"
-            v-model="email"
+            v-model="formData.email"
           />
+          <span class="text-red-600 pb-3" v-if="validation.email.$invalid"
+            >Email is not valid</span
+          >
         </div>
 
         <div class="flex flex-col relative">
@@ -46,9 +60,12 @@ function signIn() {
           <input
             class="my-2 text-black p-2 bg-gray-200 border-2 border-gray-600 block"
             placeholder="Password"
-            v-model="password"
+            v-model="formData.password"
             :type="passwordObject.passwordType"
           />
+          <span class="text-red-600 pb-3" v-if="validation.password.$invalid"
+            >Password must be at least 8 char</span
+          >
           <EyeIcon
             v-if="!passwordObject.isPasswordVisible"
             @click="store.passwordVisibilityToggle(passwordObject)"
@@ -71,8 +88,8 @@ function signIn() {
             class="ma-2 hover:text-blue-700 text-blue-500"
             to="/signup"
           >
-            Create new</router-link
-          >
+            Create new
+          </router-link>
         </p>
       </form>
     </div>
