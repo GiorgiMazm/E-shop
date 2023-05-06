@@ -85,25 +85,11 @@ export default {
     return productsList.array.find((item) => item.id === id);
   },
 
-  async editProductItem(
-    id: number,
-    name: string,
-    price: number,
-    description: string,
-    link: string,
-    category: ItemCategory
-  ) {
+  async editProductItem(item: Item) {
     if (!userModule.getCurrentUser.value?.admin) return;
-    const obj = {
-      name: name,
-      price: price,
-      link: link,
-      description: description,
-      category: category,
-    };
 
     try {
-      await axios.put("http://localhost:8080/editProduct/" + id, obj);
+      await axios.put("http://localhost:8080/editProduct/" + item.id, item);
       await this.loadAllProduct();
     } catch (error) {
       alert(error);

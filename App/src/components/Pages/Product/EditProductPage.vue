@@ -9,22 +9,10 @@ import { useVuelidate } from "@vuelidate/core";
 const store = useProductStore();
 const route = useRoute();
 const router = useRouter();
-const product = store.productModule.getProductById(Number(route.params.id));
 
-const formData = reactive({
-  name: "",
-  price: 0,
-  link: "",
-  description: "",
-  category: ItemCategory.NotSet,
-});
-if (product) {
-  formData.name = product.name;
-  formData.price = product.price;
-  formData.link = product.link;
-  formData.description = product.description;
-  formData.category = product.category;
-}
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const product = store.productModule.getProductById(Number(route.params.id))!;
+const formData = reactive(product);
 const rules = {
   name: { required },
   price: { required, integer, minValue: minValue(1) },
@@ -37,14 +25,7 @@ const validation = useVuelidate(rules, formData);
 function editProductItem() {
   if (validation.value.$invalid) return;
   if (product) {
-    store.productModule.editProductItem(
-      product.id,
-      formData.name,
-      formData.price,
-      formData.description,
-      formData.link,
-      formData.category
-    );
+    store.productModule.editProductItem(product);
     router.push("/products");
   }
 }
