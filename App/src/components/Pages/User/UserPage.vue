@@ -4,8 +4,10 @@ import { reactive } from "vue";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/vue/20/solid";
 import { minLength, required, email } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import { useRouter } from "vue-router";
 
 const store = useProductStore();
+const router = useRouter();
 const user = store.userModule.getCurrentUser;
 
 const formData = reactive({
@@ -43,6 +45,7 @@ function editUserInfo() {
     email: formData.email,
     password: formData.password,
   });
+  router.push("/");
 }
 </script>
 
@@ -111,20 +114,19 @@ function editUserInfo() {
             class="w-5 h-5 cursor-pointer absolute right-5 top-9"
           />
         </div>
-        <router-link
+        <button
           class="rounded-xl bg-gray-100 py-3 px-10 mr-3 my-4 hover:text-amber-500"
-          :to="'/'"
-          @click="editUserInfo"
+          @click.prevent="editUserInfo"
         >
-          Save</router-link
-        >
+          Save
+        </button>
 
-        <router-link
+        <button
+          @click.prevent="router.push('/')"
           class="rounded-xl bg-gray-100 py-3 px-10 mr-3 my-4 hover:text-amber-500"
-          :to="'/'"
         >
-          Cancel</router-link
-        >
+          Cansel
+        </button>
       </form>
     </div>
   </section>

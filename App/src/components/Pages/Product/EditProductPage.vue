@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useProductStore } from "../../../stores/ProductStore";
 import { reactive } from "vue";
 import { ItemCategory } from "../../../types/ItemCategory";
@@ -8,6 +8,7 @@ import { useVuelidate } from "@vuelidate/core";
 
 const store = useProductStore();
 const route = useRoute();
+const router = useRouter();
 const product = store.productModule.getProductById(Number(route.params.id));
 
 const formData = reactive({
@@ -44,6 +45,7 @@ function editProductItem() {
       formData.link,
       formData.category
     );
+    router.push("/products");
   }
 }
 </script>
@@ -116,20 +118,19 @@ function editProductItem() {
           </select>
         </div>
 
-        <router-link
-          @click="editProductItem"
+        <button
+          @click.prevent="editProductItem"
           class="rounded-xl bg-gray-700 py-3 px-10 mr-3 my-4 hover:text-amber-500"
-          :to="'/products/'"
         >
-          Save</router-link
-        >
+          Save
+        </button>
 
-        <router-link
+        <button
+          @click.prevent="router.push('/products')"
           class="rounded-xl bg-gray-700 py-3 px-10 mr-3 my-4 hover:text-amber-500"
-          :to="'/products/'"
         >
-          Cancel</router-link
-        >
+          Cansel
+        </button>
       </form>
     </div>
   </section>
