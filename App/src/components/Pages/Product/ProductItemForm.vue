@@ -1,25 +1,50 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import { useProductStore } from "../../../stores/ProductStore";
 import { ItemCategory } from "../../../types/ItemCategory";
+import { required, integer, minValue } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 const store = useProductStore();
-const name = ref("");
-const price = ref(0);
-const link = ref("");
-const description = ref("");
-const category = ref<ItemCategory>(ItemCategory.NotSet);
+
+const formData = reactive({
+  name: "",
+  price: 0,
+  link: "",
+  description: "",
+  category: ItemCategory.NotSet,
+});
+const rules = {
+  name: { required },
+  price: { required, integer, minValue: minValue(1) },
+  link: { required },
+  description: { required },
+  category: { required },
+};
+const validation = useVuelidate(rules, formData);
 const isFormVisible = ref(false);
+
 const user = store.userModule.getCurrentUser;
 
 function toggleNewItemForm(): void {
   isFormVisible.value = !isFormVisible.value;
-  name.value = "";
-  price.value = 0;
-  link.value = "";
-  description.value = "";
-  description.value = "";
-  category.value = ItemCategory.NotSet;
+  formData.name = "";
+  formData.price = 0;
+  formData.link = "";
+  formData.description = "";
+  formData.category = ItemCategory.NotSet;
+}
+
+function createProduct() {
+  if (validation.value.$invalid) return;
+  store.productModule.addProductItem({
+    name: formData.name,
+    price: formData.price,
+    link: formData.link,
+    description: formData.description,
+    category: formData.category,
+  });
+  toggleNewItemForm();
 }
 </script>
 
@@ -32,8 +57,11 @@ function toggleNewItemForm(): void {
           class="rounded mx-3 text-black px-3"
           placeholder="Name of the product"
           type="text"
-          v-model="name"
+          v-model="formData.name"
         />
+        <span class="text-red-600 pb-3" v-if="validation.name.$invalid"
+          >Name is required</span
+        >
       </div>
 
       <div class="my-4">
@@ -42,8 +70,11 @@ function toggleNewItemForm(): void {
           class="rounded mx-3 text-black px-3"
           placeholder="Price of the product"
           type="text"
-          v-model="price"
+          v-model="formData.price"
         />
+        <span class="text-red-600 pb-3" v-if="validation.price.$invalid"
+          >Price must be a number bigger than 0</span
+        >
       </div>
 
       <div class="my-4">
@@ -52,8 +83,11 @@ function toggleNewItemForm(): void {
           class="rounded mx-3 text-black px-3"
           placeholder="Image of the product"
           type="text"
-          v-model="link"
+          v-model="formData.link"
         />
+        <span class="text-red-600 pb-3" v-if="validation.link.$invalid"
+          >Link is required
+        </span>
       </div>
 
       <div class="my-4">
@@ -62,33 +96,30 @@ function toggleNewItemForm(): void {
           class="rounded mx-3 text-black px-3"
           placeholder="Description"
           type="text"
-          v-model="description"
+          v-model="formData.description"
         />
+        <span class="text-red-600 pb-3" v-if="validation.description.$invalid"
+          >Description is required</span
+        >
       </div>
 
       <div class="my-4">
         <label>Product category</label>
-        <select v-model="category" class="text-black ml-4">
+        <select v-model="formData.category" class="text-black ml-4">
           <option :value="ItemCategory.NotSet" disabled selected hidden>
             Not set
           </option>
           <option :value="ItemCategory.Technique">Technique</option>
           <option :value="ItemCategory.Gym">Gym</option>
         </select>
+        <span class="text-red-600 pb-3" v-if="validation.category.$invalid"
+          >Category is required</span
+        >
       </div>
 
       <button
         class="mx-3 rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-500"
-        @click.prevent="
-          store.productModule.addProductItem({
-            name: name,
-            price: price,
-            link: link,
-            description: description,
-            category: category,
-          });
-          toggleNewItemForm();
-        "
+        @click.prevent="createProduct"
         type="submit"
       >
         Create

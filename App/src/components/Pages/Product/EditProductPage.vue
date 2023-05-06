@@ -1,27 +1,48 @@
 <script lang="ts" setup>
 import { useRoute } from "vue-router";
 import { useProductStore } from "../../../stores/ProductStore";
-import { ref } from "vue";
+import { reactive } from "vue";
 import { ItemCategory } from "../../../types/ItemCategory";
+import { integer, minValue, required } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 const store = useProductStore();
 const route = useRoute();
-const item = store.productModule.getProductById(Number(route.params.id));
-const name = ref(item?.name ?? "");
-const price = ref(item?.price ?? 0);
-const description = ref(item?.description ?? "");
-const link = ref(item?.link ?? "");
-const category = ref(item?.category ?? ItemCategory.NotSet);
+const product = store.productModule.getProductById(Number(route.params.id));
+
+const formData = reactive({
+  name: "",
+  price: 0,
+  link: "",
+  description: "",
+  category: ItemCategory.NotSet,
+});
+if (product) {
+  formData.name = product.name;
+  formData.price = product.price;
+  formData.link = product.link;
+  formData.description = product.description;
+  formData.category = product.category;
+}
+const rules = {
+  name: { required },
+  price: { required, integer, minValue: minValue(1) },
+  link: { required },
+  description: { required },
+  category: { required },
+};
+const validation = useVuelidate(rules, formData);
 
 function editProductItem() {
-  if (item) {
+  if (validation.value.$invalid) return;
+  if (product) {
     store.productModule.editProductItem(
-      item.id,
-      name.value,
-      price.value,
-      description.value,
-      link.value,
-      category.value
+      product.id,
+      formData.name,
+      formData.price,
+      formData.description,
+      formData.link,
+      formData.category
     );
   }
 }
@@ -38,8 +59,11 @@ function editProductItem() {
             class="rounded text-black px-3 my-2 border-2 border-amber-500"
             placeholder="Name of the product"
             type="text"
-            v-model="name"
+            v-model="formData.name"
           />
+          <span class="text-red-600 pb-3" v-if="validation.name.$invalid"
+            >Name is required</span
+          >
         </div>
         <div class="flex flex-col">
           <label>Product price (in $)</label>
@@ -47,8 +71,11 @@ function editProductItem() {
             class="rounded text-black px-3 my-2 border-2 border-amber-500"
             placeholder="Name of the product"
             type="text"
-            v-model="price"
+            v-model="formData.price"
           />
+          <span class="text-red-600 pb-3" v-if="validation.price.$invalid"
+            >Price must be a number bigger than 0</span
+          >
         </div>
         <div class="flex flex-col">
           <label>Product description</label>
@@ -56,8 +83,11 @@ function editProductItem() {
             class="rounded text-black px-3 my-2 border-2 border-amber-500 h-64"
             placeholder="Name of the product"
             type="text"
-            v-model="description"
+            v-model="formData.description"
           />
+          <span class="text-red-600 pb-3" v-if="validation.description.$invalid"
+            >Description is required</span
+          >
         </div>
         <div class="flex flex-col">
           <label>Product image link</label>
@@ -65,14 +95,17 @@ function editProductItem() {
             class="rounded text-black px-3 my-2 border-2 border-amber-500"
             placeholder="Name of the product"
             type="text"
-            v-model="link"
+            v-model="formData.link"
           />
+          <span class="text-red-600 pb-3" v-if="validation.link.$invalid"
+            >Link is required
+          </span>
         </div>
 
         <div class="flex flex-col mb-4">
           <label>Product category</label>
           <select
-            v-model="category"
+            v-model="formData.category"
             class="rounded text-black px-3 my-2 border-2 border-amber-500"
           >
             <option :value="ItemCategory.NotSet" disabled selected hidden>
