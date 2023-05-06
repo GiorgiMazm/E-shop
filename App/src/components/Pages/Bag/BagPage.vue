@@ -3,8 +3,8 @@ import UserBag from "./UserBag.vue";
 import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
-const store = useProductStore();
 
+const store = useProductStore();
 const userBagSum = computed(() => store.userModule.getUserBagSum);
 </script>
 

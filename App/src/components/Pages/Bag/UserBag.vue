@@ -7,7 +7,6 @@ const store = useProductStore();
 const userBag = computed(() => {
   return store.userModule.getCurrentUser?.bag;
 });
-
 const itemAmount = computed(() => store.userModule.getCurrentUser?.bag.length);
 </script>
 

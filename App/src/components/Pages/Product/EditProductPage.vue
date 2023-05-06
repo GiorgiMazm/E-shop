@@ -7,7 +7,6 @@ import { ItemCategory } from "../../../types/ItemCategory";
 const store = useProductStore();
 const route = useRoute();
 const item = store.productModule.getProductById(Number(route.params.id));
-
 const name = ref(item?.name ?? "");
 const price = ref(item?.price ?? 0);
 const description = ref(item?.description ?? "");

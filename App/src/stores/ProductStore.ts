@@ -13,6 +13,7 @@ export const useProductStore = defineStore("Products", () => {
       passwordObject.passwordType = "text";
     else passwordObject.passwordType = "password";
   }
+
   return {
     productModule,
     userModule,

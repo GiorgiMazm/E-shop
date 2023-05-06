@@ -6,7 +6,6 @@ import { useRouter } from "vue-router";
 const props = defineProps<{
   user: User;
 }>();
-
 const router = useRouter();
 const store = useProductStore();
 const currentUser = store.userModule.getCurrentUser === props.user;
