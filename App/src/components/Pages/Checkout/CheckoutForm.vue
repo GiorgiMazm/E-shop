@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useProductStore } from "../../../stores/ProductStore";
 import { reactive } from "vue";
-import { maxLength, minLength, required } from "@vuelidate/validators";
+import { integer, maxLength, minLength, required } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import { useRouter } from "vue-router";
 
@@ -23,13 +23,14 @@ const rules = {
   lastName: { required },
   city: { required },
   street: { required },
-  zip: { required, minLength: minLength(5), maxLength: maxLength(5) },
+  zip: { required, minLength: minLength(5), maxLength: maxLength(5), integer },
   creditCardNumber: {
+    integer,
     required,
     minLength: minLength(16),
     maxLength: maxLength(16),
   },
-  ccv: { required, minLength: minLength(3), maxLength: maxLength(3) },
+  ccv: { required, minLength: minLength(3), maxLength: maxLength(3), integer },
   expirationDate: {
     required,
     minLength: minLength(5),
@@ -45,7 +46,7 @@ if (user) {
 }
 
 function buy() {
-  if (validation.value.$invalid) return;
+  // if (validation.value.$invalid) return;
   router.push("/");
   alert("you have successfully bought it!");
 }
