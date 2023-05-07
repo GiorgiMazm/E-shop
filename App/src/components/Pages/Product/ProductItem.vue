@@ -41,7 +41,7 @@ function addItemToBag() {
         @click.prevent="router.push('/checkout')"
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-600"
       >
-        Buy now??
+        Buy now
       </button>
       <button
         @click="addItemToBag"
