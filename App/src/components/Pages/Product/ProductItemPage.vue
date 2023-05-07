@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/solid";
 import ReviewSection from "./Review/ReviewSection.vue";
@@ -7,6 +7,7 @@ import { ref } from "vue";
 
 const store = useProductStore();
 const route = useRoute();
+const router = useRouter();
 const item = store.productModule.getProductById(Number(route.params.id));
 const quantity = ref(1);
 
@@ -46,6 +47,7 @@ function addSeveralItems() {
           </div>
 
           <button
+            @click.prevent="router.push('/checkout')"
             class="rounded-xl bg-gray-700 py-3 px-4 m-5 ml-0 hover:text-amber-600"
           >
             Buy now

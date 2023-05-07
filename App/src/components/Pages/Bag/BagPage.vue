@@ -3,9 +3,11 @@ import UserBag from "./UserBag.vue";
 import { useProductStore } from "../../../stores/ProductStore";
 import { CurrencyDollarIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 
 const store = useProductStore();
 const userBagSum = computed(() => store.userModule.getUserBagSum);
+const router = useRouter();
 </script>
 
 <template>
@@ -22,6 +24,7 @@ const userBagSum = computed(() => store.userModule.getUserBagSum);
           Total is: {{ userBagSum }}
           <CurrencyDollarIcon class="h-12 w-12 text-black inline" />
           <button
+            @click.prevent="router.push('/checkout')"
             class="rounded-xl bg-gray-700 py-3 px-4 ml-3 hover:text-amber-600"
           >
             Process to checkout

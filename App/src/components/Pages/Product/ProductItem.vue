@@ -2,11 +2,13 @@
 import { XMarkIcon, PencilIcon } from "@heroicons/vue/24/solid";
 import { useProductStore } from "../../../stores/ProductStore";
 import Item from "../../../types/Item";
+import { useRouter } from "vue-router";
 
 const props = defineProps<{
   item: Item;
 }>();
 const store = useProductStore();
+const router = useRouter();
 const user = store.userModule.getCurrentUser;
 
 function addItemToBag() {
@@ -36,9 +38,10 @@ function addItemToBag() {
     <p class="py-3">{{ props.item.price }}$</p>
     <div class="flex flex-wrap justify-around">
       <button
+        @click.prevent="router.push('/checkout')"
         class="rounded-xl bg-gray-700 py-3 px-4 mr-3 hover:text-amber-600"
       >
-        Buy now
+        Buy now??
       </button>
       <button
         @click="addItemToBag"

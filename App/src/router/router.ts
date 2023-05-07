@@ -14,6 +14,7 @@ import { useProductStore } from "../stores/ProductStore";
 import EditProductPage from "../components/Pages/Product/EditProductPage.vue";
 import UserPage from "../components/Pages/User/UserPage.vue";
 import UserListPage from "../components/Pages/User/UserListPage.vue";
+import CheckoutPage from "../components/Pages/Checkout/CheckoutPage.vue";
 
 const ifNotAuth = (
   to: RouteLocationNormalized,
@@ -59,6 +60,11 @@ const routes = [
     path: "/bag",
     component: BagPage,
     beforeEnter: ifAuth,
+  },
+
+  {
+    path: "/checkout",
+    component: CheckoutPage,
   },
   {
     path: "/signin",
