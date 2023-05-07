@@ -100,7 +100,7 @@ function editUserInfo() {
             v-model="formData.password"
           />
           <span class="text-red-600 pb-3" v-if="validation.password.$invalid"
-            >Password must be at least 8 char</span
+            >Password must be at least 6 characters</span
           >
 
           <EyeIcon

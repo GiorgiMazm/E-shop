@@ -6,9 +6,12 @@ import com.example.service.model.User;
 import com.example.service.repository.ProductRepository;
 import com.example.service.repository.ReviewRepository;
 import com.example.service.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping
@@ -36,6 +39,18 @@ public class ReviewController {
 
         Product product = productRepository.findById(review.getProduct().getId())
                 .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        if (Objects.equals(review.getTitle().trim(), "")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Review title can not be empty");
+        }
+
+        if (Objects.equals(review.getDescription().trim(), "")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Review description can not be empty");
+        }
+
+        if (review.getRate() < 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Review rate must be a number bigger than 0");
+        }
 
         review.setUser(user);
         review.setProduct(product);

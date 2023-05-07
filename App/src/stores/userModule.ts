@@ -84,6 +84,7 @@ export default {
     try {
       await axios.post("http://localhost:8080/newUser", user);
       await this.loadAllUser();
+      return true;
     } catch (error) {
       alert(error);
       console.log(error);

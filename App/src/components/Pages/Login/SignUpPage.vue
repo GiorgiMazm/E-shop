@@ -31,14 +31,14 @@ const passwordObject = reactive({
 async function signUp() {
   if (validation.value.$invalid) return;
 
-  await store.userModule.signUp({
+  const signUpSuccess = await store.userModule.signUp({
     name: formData.name,
     lastName: formData.lastName,
     email: formData.email,
     password: formData.password,
   });
   await store.userModule.loadAllUser();
-  store.userModule.signIn(formData.email, formData.password);
+  if (signUpSuccess) store.userModule.signIn(formData.email, formData.password);
   if (store.userModule.getCurrentUser) await router.push("/");
 }
 </script>
@@ -101,7 +101,7 @@ async function signUp() {
             :type="passwordObject.passwordType"
           />
           <span class="text-red-600 pb-3" v-if="validation.password.$invalid"
-            >Password must be at least 8 char</span
+            >Password must be at least 6 characters</span
           >
           <EyeIcon
             v-if="!passwordObject.isPasswordVisible"
