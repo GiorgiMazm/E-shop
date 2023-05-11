@@ -99,6 +99,9 @@ export default {
     return currentUser.user;
   }),
 
+  isCurrentUserAdmin: computed(() => {
+    return currentUser.user?.admin;
+  }),
   getUserList: computed(() => {
     return userList;
   }),

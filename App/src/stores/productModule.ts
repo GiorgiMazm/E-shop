@@ -55,7 +55,7 @@ export default {
     description: string;
     category: ItemCategory;
   }): Promise<void> {
-    if (!userModule.getCurrentUser.value?.admin) return;
+    if (!userModule.isCurrentUserAdmin.value) return;
 
     try {
       await axios.post("http://localhost:8080/newProduct", item);
@@ -67,7 +67,7 @@ export default {
   },
 
   async removeProductItem(id: number): Promise<void> {
-    if (!userModule.getCurrentUser.value?.admin) return;
+    if (!userModule.isCurrentUserAdmin.value) return;
     try {
       await axios.delete("http://localhost:8080/deleteProduct/" + id);
       await this.loadAllProduct();
@@ -86,7 +86,7 @@ export default {
   },
 
   async editProductItem(item: Item) {
-    if (!userModule.getCurrentUser.value?.admin) return;
+    if (!userModule.isCurrentUserAdmin.value) return;
 
     try {
       await axios.put("http://localhost:8080/editProduct/" + item.id, item);

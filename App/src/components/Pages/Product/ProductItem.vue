@@ -9,7 +9,6 @@ const props = defineProps<{
 }>();
 const store = useProductStore();
 const router = useRouter();
-const user = store.userModule.getCurrentUser;
 
 function addItemToBag() {
   if (store.userModule.getCurrentUser) {
@@ -21,7 +20,10 @@ function addItemToBag() {
 
 <template>
   <div class="bg-red-800 w-80 m-2 p-2">
-    <div class="flex justify-between p-3" v-if="user?.admin">
+    <div
+      class="flex justify-between p-3"
+      v-if="store.userModule.isCurrentUserAdmin"
+    >
       <XMarkIcon
         class="h-6 w-6 cursor-pointer hover:text-black"
         @click="store.productModule.removeProductItem(props.item.id)"

@@ -47,7 +47,7 @@ export default {
   },
 
   async removeReview(id: number) {
-    if (!UserModule.getCurrentUser.value?.admin) return;
+    if (!UserModule.isCurrentUserAdmin.value) return;
     try {
       await axios.delete("http://localhost:8080/deleteReview/" + id);
       await this.loadAllReview();
